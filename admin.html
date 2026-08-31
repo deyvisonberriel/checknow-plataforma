@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | Check Now</title>
+  
+  <!-- FAVICONS & APPLE TOUCH ICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
+  <meta name="theme-color" content="#13899C" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --brand-teal: #13899C;
+      --brand-green: #3B8E39;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { teal: '#13899C', green: '#3B8E39' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-slate-800 antialiased font-sans">
+  
+  <!-- ALERTS -->
+  <div id="toast" class="fixed top-4 right-4 z-50 transform transition-transform duration-300 translate-x-full">
+    <div class="bg-slate-800 text-white px-6 py-3 rounded shadow-lg flex items-center gap-3">
+      <span id="toastMsg"></span>
+    </div>
+  </div>
+
+  <!-- LOGIN VIEW -->
+  <div id="loginView" class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm text-center border border-gray-100">
+      <div class="w-12 h-12 bg-brand-teal text-white rounded-xl flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="lock" class="w-6 h-6"></i>
+      </div>
+      <h1 class="text-2xl font-bold text-slate-800 mb-2">Acesso Restrito</h1>
+      <p class="text-slate-500 text-sm mb-6">Insira a senha mestra para continuar</p>
+      
+      <form id="loginForm" class="space-y-4">
+        <div class="relative">
+          <input type="password" id="password" required placeholder="Senha do Administrador" 
+            class="w-full pl-4 pr-12 py-3 rounded-xl border border-gray-200 focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/20 outline-none transition-all text-center font-medium" />
+          <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-teal transition-colors p-1" title="Mostrar senha">
+            <i data-lucide="eye" id="eyeIcon" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <button type="submit" class="w-full bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-3 rounded-xl transition-colors shadow-md">
+          Entrar no Painel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboardView" class="hidden min-h-screen bg-gray-50 flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-brand-teal text-white rounded flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+          </div>
+          <h1 class="font-bold text-slate-800 tracking-tight">Check Now <span class="text-brand-teal">Admin</span></h1>
+        </div>
+        <button id="btnLogout" class="text-sm font-medium text-slate-500 hover:text-red-500 flex items-center gap-2 transition-colors">
+          <i data-lucide="log-out" class="w-4 h-4"></i> Sair
+        </button>
+      </div>
+      <!-- Subnav (Tabs) -->
+      <div class="bg-gray-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6">
+          <button id="tabCourses" onclick="switchTab('courses')" class="py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors">
+            Cursos
+          </button>
+          <button id="tabCategories" onclick="switchTab('categories')" class="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors">
+            Categorias
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+      
+      <!-- SEÇÃO CURSOS -->
+      <div id="coursesSection">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">Catálogo de Cursos</h2>
+            <p class="text-slate-500 text-sm mt-1">Gerencie os materiais e certificados disponíveis na vitrine.</p>
+          </div>
+          <button onclick="openModal()" class="bg-brand-green hover:bg-[#2e6e2d] text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 shadow-md transition-colors whitespace-nowrap">
+            <i data-lucide="plus" class="w-4 h-4"></i> Novo Curso
+          </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+              <thead class="bg-gray-50/80 border-b border-gray-200 text-slate-700 text-xs uppercase font-semibold">
+                <tr>
+                  <th class="px-6 py-4">TAG</th>
+                  <th class="px-6 py-4">Título</th>
+                  <th class="px-6 py-4">Preço (Atual / Antigo)</th>
+                  <th class="px-6 py-4 text-center">Oferta Especial</th>
+                  <th class="px-6 py-4 text-center">Status</th>
+                  <th class="px-6 py-4 text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="courseTableBody" class="divide-y divide-gray-100">
+                <!-- Renderizado dinamicamente -->
+              </tbody>
+            </table>
+          </div>
+          <div id="loadingIndicator" class="p-8 text-center text-slate-400">
+            Carregando cursos...
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO CATEGORIAS -->
+      <div id="categoriesSection" class="hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">Gestão de Categorias</h2>
+            <p class="text-slate-500 text-sm mt-1">Organize os cursos em grupos lógicos.</p>
+          </div>
+          <button onclick="openCategoryModal()" class="bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 shadow-md transition-colors whitespace-nowrap">
+            <i data-lucide="plus" class="w-4 h-4"></i> Nova Categoria
+          </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden max-w-3xl">
+          <table class="w-full text-left text-sm text-slate-600">
+            <thead class="bg-gray-50/80 border-b border-gray-200 text-slate-700 text-xs uppercase font-semibold">
+              <tr>
+                <th class="px-6 py-4">Nome da Categoria</th>
+                <th class="px-6 py-4 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="categoryTableBody" class="divide-y divide-gray-100">
+              <!-- Renderizado dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL DE FORMULÁRIO -->
+  <div id="courseModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+        <h3 id="modalTitle" class="text-lg font-bold text-slate-800">Novo Curso</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <div class="p-6 overflow-y-auto">
+        <form id="courseForm" class="space-y-5">
+          <input type="hidden" id="courseId" />
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">TAG (Ex: NR-06)</label>
+              <input type="text" id="courseTag" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Categoria</label>
+              <select id="courseCategory" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm">
+                <!-- Preenchido dinamicamente via JS -->
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Título do Curso</label>
+            <input type="text" id="courseTitle" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm font-medium" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Descrição Breve</label>
+            <textarea id="courseDesc" required rows="2" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm resize-none"></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Preço Atual (R$)</label>
+              <input type="number" step="0.01" id="coursePrice" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Preço Antigo (R$)</label>
+              <input type="number" step="0.01" id="courseOldPrice" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+            </div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+            <div>
+              <span class="block text-sm font-bold text-slate-800">Destaque: Oferta Especial</span>
+              <span class="text-xs text-slate-500">Exibe a etiqueta laranja vibrante no card.</span>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="courseSpecial" class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-3">
+        <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">Cancelar</button>
+        <button id="btnSaveCourse" class="bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-2 px-5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+          Salvar Curso
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CATEGORIA -->
+  <div id="categoryModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+        <h3 id="categoryModalTitle" class="text-lg font-bold text-slate-800">Nova Categoria</h3>
+        <button onclick="closeCategoryModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <form id="categoryForm" class="space-y-5">
+          <input type="hidden" id="categoryId" />
+          
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Nome da Categoria</label>
+            <input type="text" id="categoryName" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm font-medium" />
+          </div>
+        </form>
+      </div>
+
+      <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-3">
+        <button onclick="closeCategoryModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">Cancelar</button>
+        <button id="btnSaveCategory" class="bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-2 px-5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lib/supabase.js"></script>
+
+  <script src="db.js"></script>
+  <script>
+    // Iniciar ícones
+    lucide.createIcons();
+
+    let authToken = localStorage.getItem('admin_token') || null;
+    
+    // UI Elements
+    const loginView = document.getElementById('loginView');
+    const dashboardView = document.getElementById('dashboardView');
+    const loginForm = document.getElementById('loginForm');
+    const btnLogout = document.getElementById('btnLogout');
+    const tableBody = document.getElementById('courseTableBody');
+    const loading = document.getElementById('loadingIndicator');
+    const toast = document.getElementById('toast');
+    
+    // Modal Elements (Course)
+    const modal = document.getElementById('courseModal');
+    const form = document.getElementById('courseForm');
+    const btnSave = document.getElementById('btnSaveCourse');
+
+    // Modal Elements (Category)
+    const categoryModal = document.getElementById('categoryModal');
+    const categoryForm = document.getElementById('categoryForm');
+    const btnSaveCategory = document.getElementById('btnSaveCategory');
+    const categoryTableBody = document.getElementById('categoryTableBody');
+
+    // Estado local vinculado ao db.js (Single Source of Truth no localStorage)
+    let coursesData = window.db ? window.db.getCourses() : [];
+    let categoriesData = window.db ? window.db.getCategories() : [];
+
+    // Password Toggle
+    function togglePassword() {
+      const pwd = document.getElementById('password');
+      const icon = document.getElementById('eyeIcon');
+      if (pwd.type === 'password') {
+        pwd.type = 'text';
+        icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        pwd.type = 'password';
+        icon.setAttribute('data-lucide', 'eye');
+      }
+      lucide.createIcons();
+    }
+
+    // Tab Switching
+    function switchTab(tab) {
+      const secCourses = document.getElementById('coursesSection');
+      const secCats = document.getElementById('categoriesSection');
+      const btnCourses = document.getElementById('tabCourses');
+      const btnCats = document.getElementById('tabCategories');
+
+      if (tab === 'courses') {
+        secCourses.classList.remove('hidden');
+        secCats.classList.add('hidden');
+        btnCourses.className = 'py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors';
+        btnCats.className = 'py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors';
+        fetchCourses();
+      } else {
+        secCourses.classList.add('hidden');
+        secCats.classList.remove('hidden');
+        btnCats.className = 'py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors';
+        btnCourses.className = 'py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors';
+        renderCategoryTable();
+      }
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+      if (authToken) {
+        showDashboard();
+      } else {
+        loginView.classList.remove('hidden');
+      }
+    });
+
+    // Helper: Toast
+    function showToast(msg, isError = false) {
+      document.getElementById('toastMsg').textContent = msg;
+      const t = toast.querySelector('div');
+      t.className = `px-6 py-3 rounded shadow-lg flex items-center gap-3 text-white ${isError ? 'bg-red-500' : 'bg-slate-800'}`;
+      toast.classList.remove('translate-x-full');
+      setTimeout(() => toast.classList.add('translate-x-full'), 3000);
+    }
+
+    // Auth: Login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pwd = document.getElementById('password').value;
+      
+      // Bypass Local para testes de UI
+      if (pwd === 'CheckNowAdmin2026') {
+        authToken = 'demo-token';
+        localStorage.setItem('admin_token', authToken);
+        showDashboard();
+      } else {
+        showToast('Senha incorreta', true);
+      }
+    });
+
+    // Auth: Logout
+    btnLogout.addEventListener('click', () => {
+      authToken = null;
+      localStorage.removeItem('admin_token');
+      dashboardView.classList.add('hidden');
+      loginView.classList.remove('hidden');
+      document.getElementById('password').value = '';
+    });
+
+    // View: Mostrar Dashboard
+    async function showDashboard() {
+      loginView.classList.add('hidden');
+      dashboardView.classList.remove('hidden');
+      await fetchCourses();
+      await fetchCategories();
+    }
+
+    // API: Buscar Cursos
+    async function fetchCourses() {
+      loading.classList.remove('hidden');
+      tableBody.innerHTML = '';
+      if (window.db) coursesData = await window.db.getCourses();
+      renderTable();
+      loading.classList.add('hidden');
+    }
+
+    // API: Buscar Categorias
+    async function fetchCategories() {
+      if (window.db) categoriesData = await window.db.getCategories();
+      renderCategoryTable();
+    }
+
+    function renderTable() {
+      if (!coursesData || coursesData.length === 0) {
+        console.error("Erro: coursesData está vazio. Supabase não retornou dados.");
+        tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500 font-medium">Nenhum curso encontrado no banco.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = coursesData.map(c => `
+        <tr class="hover:bg-gray-50/50 transition-colors">
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-brand-teal/10 text-brand-teal border border-brand-teal/20">
+              ${c.tag}
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <p class="text-sm font-semibold text-slate-800">${c.title}</p>
+            <p class="text-xs text-slate-500 truncate max-w-[200px]">${c.category || c.categoryId}</p>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-baseline gap-2">
+              <span class="text-sm font-bold text-slate-800">R$ ${Number(c.currentPrice).toFixed(2)}</span>
+              <span class="text-xs text-slate-400 line-through">R$ ${Number(c.oldPrice).toFixed(2)}</span>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-center">
+            ${c.isSpecialOffer ? 
+              `<span class="inline-flex text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">🔥 SIM</span>` : 
+              `<span class="text-slate-300 text-sm">-</span>`}
+          </td>
+          <td class="px-6 py-4 text-center">
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-brand-green">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> ${c.status}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button onclick="editCourse('${c.id}')" class="p-1.5 text-slate-400 hover:text-brand-teal transition-colors" title="Editar">
+                <i data-lucide="edit-2" class="w-4 h-4"></i>
+              </button>
+              <button onclick="deleteCourse('${c.id}')" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors" title="Excluir">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Helper: Popular Select de Categoria
+    function populateCategorySelect() {
+      const select = document.getElementById('courseCategory');
+      select.innerHTML = categoriesData.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+    }
+
+    // Modal: Abrir/Fechar
+    function openModal() {
+      populateCategorySelect();
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      form.reset();
+      document.getElementById('courseId').value = '';
+      document.getElementById('modalTitle').textContent = 'Novo Curso';
+    }
+
+    // Modal: Preencher para Edição
+    function editCourse(id) {
+      const c = coursesData.find(x => x.id === id);
+      if (!c) return;
+      openModal();
+      document.getElementById('courseId').value = c.id;
+      document.getElementById('courseTag').value = c.tag;
+      document.getElementById('courseCategory').value = c.category || c.categoryId;
+      document.getElementById('courseTitle').value = c.title;
+      document.getElementById('courseDesc').value = c.description;
+      document.getElementById('coursePrice').value = c.currentPrice;
+      document.getElementById('courseOldPrice').value = c.oldPrice;
+      document.getElementById('courseSpecial').checked = c.isSpecialOffer;
+      document.getElementById('modalTitle').textContent = 'Editar Curso';
+    }
+
+    // API: Salvar Curso
+    btnSave.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) return form.reportValidity();
+      
+      const id = document.getElementById('courseId').value;
+      const payload = {
+        tag: document.getElementById('courseTag').value,
+        categoryId: document.getElementById('courseCategory').value,
+        title: document.getElementById('courseTitle').value,
+        description: document.getElementById('courseDesc').value,
+        currentPrice: parseFloat(document.getElementById('coursePrice').value),
+        oldPrice: parseFloat(document.getElementById('courseOldPrice').value),
+        isSpecialOffer: document.getElementById('courseSpecial').checked,
+        status: 'active'
+      };
+
+      if (id) {
+        payload.id = id;
+      } else {
+        payload.id = payload.tag.toLowerCase().replace(/[^a-z0-9-]/g, '') + '-' + Date.now();
+      }
+
+      try {
+        if (window.db) await window.db.saveCourse(payload);
+        showToast('Curso salvo com sucesso!');
+        closeModal();
+        await fetchCourses();
+      } catch (err) {
+        showToast('Erro ao salvar curso no banco.', true);
+        console.error(err);
+      }
+    });
+
+    // API: Excluir Curso
+    async function deleteCourse(id) {
+      if (!confirm('Tem certeza que deseja excluir este curso?')) return;
+      
+      try {
+        if (window.db) await window.db.deleteCourseDB(id);
+        showToast('Curso excluído!');
+        await fetchCourses();
+      } catch (err) {
+        showToast('Erro ao excluir curso.', true);
+        console.error(err);
+      }
+    }
+
+    // ==========================================
+    // Categoria CRUD
+    // ==========================================
+
+    function renderCategoryTable() {
+      if (!categoriesData || categoriesData.length === 0) {
+        categoryTableBody.innerHTML = `<tr><td colspan="2" class="px-6 py-8 text-center text-red-500 font-medium">Nenhuma categoria encontrada no banco.</td></tr>`;
+        return;
+      }
+      categoryTableBody.innerHTML = categoriesData.map(c => `
+        <tr class="hover:bg-gray-50/50 transition-colors">
+          <td class="px-6 py-4">
+            <span class="text-sm font-semibold text-slate-800">${c.name}</span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button onclick="editCategory('${c.id}')" class="p-1.5 text-slate-400 hover:text-brand-teal transition-colors" title="Editar">
+                <i data-lucide="edit-2" class="w-4 h-4"></i>
+              </button>
+              <button onclick="deleteCategory('${c.id}')" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors" title="Excluir">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function openCategoryModal() {
+      categoryModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCategoryModal() {
+      categoryModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      categoryForm.reset();
+      document.getElementById('categoryId').value = '';
+      document.getElementById('categoryModalTitle').textContent = 'Nova Categoria';
+    }
+
+    function editCategory(id) {
+      const c = categoriesData.find(x => x.id === id);
+      if (!c) return;
+      document.getElementById('categoryId').value = c.id;
+      document.getElementById('categoryName').value = c.name;
+      document.getElementById('categoryModalTitle').textContent = 'Editar Categoria';
+      openCategoryModal();
+    }
+
+    btnSaveCategory.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (!categoryForm.checkValidity()) return categoryForm.reportValidity();
+      
+      const id = document.getElementById('categoryId').value;
+      const name = document.getElementById('categoryName').value;
+      
+      const payload = { name };
+      if (id) {
+        payload.id = id;
+      } else {
+        payload.id = `cat-${Date.now()}`;
+      }
+
+      try {
+        if (window.db) await window.db.saveCategory(payload);
+        showToast('Categoria salva!');
+        closeCategoryModal();
+        await fetchCategories();
+      } catch (err) {
+        showToast('Erro ao salvar categoria.', true);
+        console.error(err);
+      }
+    });
+
+    async function deleteCategory(id) {
+      if (!confirm('Tem certeza que deseja excluir esta categoria?')) return;
+      
+      try {
+        if (window.db) await window.db.deleteCategoryDB(id);
+        showToast('Categoria excluída!');
+        await fetchCategories();
+      } catch (err) {
+        showToast('Erro ao excluir categoria.', true);
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

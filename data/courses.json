@@ -1,0 +1,35 @@
+﻿[
+  {
+    "id": "nr-01",
+    "tag": "NR-01",
+    "category": "Documentação e Gestão",
+    "title": "PGR e Gerenciamento de Riscos Ocupacionais",
+    "description": "Elaboração, implementação e gestão do Programa de Gerenciamento de Riscos (PGR) conforme a nova NR-01.",
+    "currentPrice": 27.00,
+    "oldPrice": 97.00,
+    "isSpecialOffer": false,
+    "status": "active"
+  },
+  {
+    "id": "nr-06",
+    "tag": "NR-06",
+    "category": "Equipamentos e EPI",
+    "title": "Equipamentos de Proteção Individual (EPI)",
+    "description": "Treinamento obrigatório e procedimentos para fornecimento, uso e higienização correta dos EPIs.",
+    "currentPrice": 1.99,
+    "oldPrice": 97.00,
+    "isSpecialOffer": true,
+    "status": "active"
+  },
+  {
+    "id": "nr-10",
+    "tag": "NR-10",
+    "category": "Segurança Operacional",
+    "title": "Segurança em Instalações Elétricas & SEP",
+    "description": "Diretrizes essenciais para trabalho seguro com eletricidade, abrangendo baixa e alta tensão.",
+    "currentPrice": 27.00,
+    "oldPrice": 97.00,
+    "isSpecialOffer": false,
+    "status": "active"
+  }
+]

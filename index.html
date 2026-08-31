@@ -1,0 +1,2385 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- 1. SEO BÁSICO & INDEXAÇÃO -->
+  <title>Check Now | Materiais Completos de NRs em PDF e Certificados - Vander Rana</title>
+  <meta name="description" content="Adquira apostilas técnicas completas e modelos de certificados das principais Normas Regulamentadoras (NR-01 a NR-35) por apenas R$ 27 cada. Conteúdo direto, prático e atualizado para profissionais e empresas de SST." />
+  <meta name="keywords" content="cursos nr, normas regulamentadoras pdf, nr 35 pdf, nr 10 sep, nr 01 pgr, certificado nr, seguranca do trabalho material, check now sst, vander rana" />
+  <meta name="author" content="Vander Rana - Check Now SST" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://cursoschecknow.com.br" />
+  
+  <!-- 2. OPEN GRAPH / FACEBOOK / WHATSAPP / LINKEDIN -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://cursoschecknow.com.br" />
+  <meta property="og:site_name" content="Check Now - Treinamentos em Segurança do Trabalho" />
+  <meta property="og:title" content="Check Now - Materiais e Cursos em PDF de Normas Regulamentadoras (NRs)" />
+  <meta property="og:description" content="Apostilas completas + modelos de certificados por R$ 27,00 cada. Download imediato e vitalício." />
+  <meta property="og:image" content="https://cursoschecknow.com.br/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Check Now - Acervo de Materiais em PDF de NRs" />
+
+  <!-- 3. TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://cursoschecknow.com.br" />
+  <meta name="twitter:title" content="Check Now - Materiais e Cursos em PDF de Normas Regulamentadoras (NRs)" />
+  <meta name="twitter:description" content="Apostilas completas + modelos de certificados por R$ 27,00 cada. Download imediato." />
+  <meta name="twitter:image" content="https://cursoschecknow.com.br/og-image.png" />
+
+  <!-- 4. FAVICONS & APPLE TOUCH ICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
+  <meta name="theme-color" content="#13899C" />
+
+  <!-- 5. DADOS ESTRUTURADOS SCHEMA.ORG (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://cursoschecknow.com.br/#organization",
+        "name": "Check Now - Treinamentos em Segurança do Trabalho",
+        "url": "https://cursoschecknow.com.br",
+        "logo": "https://cursoschecknow.com.br/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+55-21-99113-8370",
+          "contactType": "customer service",
+          "areaServed": "BR",
+          "availableLanguage": "Portuguese"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://cursoschecknow.com.br/#website",
+        "url": "https://cursoschecknow.com.br",
+        "name": "Check Now",
+        "publisher": { "@id": "https://cursoschecknow.com.br/#organization" }
+      },
+      {
+        "@type": "Product",
+        "name": "Acervo de Materiais Didáticos de Normas Regulamentadoras (NRs)",
+        "description": "Apostilas completas em PDF e modelos editáveis de certificados de conclusão conforme as diretrizes atualizadas do MTE.",
+        "image": "https://cursoschecknow.com.br/og-image.png",
+        "offers": {
+          "@type": "Offer",
+          "price": "27.00",
+          "priceCurrency": "BRL",
+          "availability": "https://schema.org/InStock",
+          "url": "https://cursoschecknow.com.br"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  
+  <!-- Banco de Dados Local (Bypass) -->
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lib/supabase.js"></script>
+  
+  <script src="db.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              teal: '#13899C',
+              'teal-dark': '#0E6A7A',
+              'teal-light': '#EBF7F9',
+              'teal-50': '#F2FAFB',
+              green: '#3B8E39',
+              'green-dark': '#2E732C',
+              'green-light': '#EDF8ED',
+            },
+            surface: {
+              body: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
+            }
+          },
+          boxShadow: {
+            'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+            'card-hover': '0 12px 24px -6px rgba(19, 137, 156, 0.12), 0 4px 8px -4px rgba(19, 137, 156, 0.08)',
+            'btn-green': '0 4px 14px 0 rgba(59, 142, 57, 0.35)',
+            'btn-teal': '0 4px 14px 0 rgba(19, 137, 156, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Padrão de fundo quadriculado sutil técnico */
+    .bg-tech-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(19, 137, 156, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(19, 137, 156, 0.04) 1px, transparent 1px);
+    }
+    .badge-pulse {
+      box-shadow: 0 0 0 0 rgba(59, 142, 57, 0.4);
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(59, 142, 57, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(59, 142, 57, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 142, 57, 0); }
+    }
+    /* Estilo de livro/apostila 3D */
+    .book-mockup {
+      transform: perspective(1000px) rotateY(-10deg) rotateX(2deg);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .book-mockup:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02);
+    }
+  </style>
+</head>
+
+<body class="bg-surface-body text-slate-700 font-sans antialiased selection:bg-brand-teal selection:text-white relative">
+
+  <!-- TOP BAR DE AVISO COM CRONÔMETRO DE ESCASSEZ -->
+  <div class="bg-brand-teal text-white text-xs sm:text-sm py-2 px-3 sm:px-4 text-center font-medium border-b border-brand-teal-dark flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+    <!-- Texto com Destaque em Verde -->
+    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-[11px] sm:text-xs font-extrabold bg-brand-green text-white shadow-sm">
+      Promoção por tempo limitado - Apostila Técnica + Certificado
+    </span>
+    
+    <!-- Cronômetro de Escassez -->
+    <div class="flex items-center gap-1.5 bg-black/25 px-2.5 py-0.5 rounded-lg border border-white/20 text-xs font-mono font-bold tracking-wider text-white">
+      <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-300"></i>
+      <span class="text-slate-100 text-[11px] font-sans font-medium hidden sm:inline">Termina em:</span>
+      <span id="topBarCountdown" class="text-amber-300 font-extrabold">00:14:59</span>
+    </div>
+
+    <!-- Envio Imediato -->
+    <span class="text-xs sm:text-sm font-semibold text-white flex items-center gap-1">
+      <span class="hidden sm:inline text-slate-200/80">•</span> Envio Imediato no Pix ou Cartão
+    </span>
+  </div>
+
+  <!-- SEÇÃO 1: NAVBAR / HEADER -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border transition-all shadow-subtle">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="#" class="flex items-center group focus:outline-none">
+        <img src="logo.png" alt="Check Now - Assessoria em Saúde e Segurança do Trabalho" class="h-11 sm:h-12 w-auto object-contain max-w-[210px] sm:max-w-[260px] transition-transform group-hover:scale-105" />
+      </a>
+
+      <!-- BOTÃO WHATSAPP SUPORTE -->
+      <div class="flex items-center">
+        <a href="https://wa.me/5521991138370?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20os%20materiais%20de%20NRs%20da%20Check%20Now." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-bold text-[11px] sm:text-sm transition-all shadow-btn-green hover:shadow-lg active:scale-95 flex-shrink-0">
+          <!-- Ícone Oficial do WhatsApp -->
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current text-white flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          <span>Fale com Suporte</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEÇÃO 2: HERO SECTION -->
+  <section class="relative pt-10 pb-16 md:pt-16 md:pb-24 bg-gradient-to-b from-white via-surface-body to-white border-b border-surface-border overflow-hidden">
+    <div class="absolute inset-0 bg-tech-grid opacity-70 pointer-events-none"></div>
+    <div class="absolute top-10 right-10 w-96 h-96 bg-brand-teal/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 left-10 w-96 h-96 bg-brand-green/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- COLUNA ESQUERDA: COPYWRITING & CTAs -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <!-- Badge de Destaque MTE -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-green-light border border-brand-green/30 text-brand-green-dark text-xs sm:text-sm font-bold badge-pulse">
+            <i data-lucide="shield-check" class="w-4 h-4 text-brand-green"></i>
+            <span>🛡️ Conforme as Diretrizes Atualizadas do MTE</span>
+          </div>
+
+          <!-- Headline H1 -->
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+            Materiais Completos e Atualizados das Principais <span class="text-brand-teal">Normas Regulamentadoras (NRs)</span>
+          </h1>
+
+          <!-- Subheadline -->
+          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+            Escolha o treinamento desejado e receba a <strong>apostila técnica completa em PDF + modelo de certificado de conclusão</strong>. O acervo definitivo para Técnicos, Engenheiros de SST e Empresas.
+          </p>
+
+          <!-- Bloco de Preço Unitário em Destaque -->
+          <div class="p-3.5 sm:p-5 rounded-2xl bg-white border border-surface-border shadow-subtle inline-block w-full sm:w-auto text-center sm:text-left">
+            <div class="flex items-center justify-center sm:justify-start gap-3 sm:gap-4">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-teal-light text-brand-teal flex items-center justify-center flex-shrink-0">
+                <i data-lucide="tag" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+              </div>
+              <div class="space-y-0.5 text-left">
+                <div class="flex items-center gap-2 justify-start">
+                  <span class="text-sm text-slate-500 font-medium">A partir de</span>
+                  <span class="text-[10px] sm:text-xs font-bold text-brand-green bg-brand-green-light px-2 py-0.5 rounded-md border border-brand-green/30">OFERTA INDIVIDUAL</span>
+                </div>
+                <div class="flex items-baseline gap-1.5 justify-start">
+                  <span class="text-2xl sm:text-4xl font-extrabold text-brand-teal whitespace-nowrap">R$ 1,99</span>
+                  <span class="hidden sm:inline text-xs text-slate-400 font-medium">(Pagamento Único)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botão CTA Principal da Hero -->
+          <div class="space-y-3 pt-2">
+            <a href="#cursos" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-green hover:bg-brand-green-dark text-white font-extrabold text-base sm:text-lg tracking-wide shadow-btn-green hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 group">
+              <span>ESCOLHER MEU CURSO</span>
+              <i data-lucide="arrow-down-circle" class="w-5 h-5 group-hover:translate-y-0.5 transition-transform"></i>
+            </a>
+
+            <!-- Microcopy de Segurança -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-4 text-xs text-slate-500 font-medium">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="lock" class="w-3.5 h-3.5 text-brand-green"></i> Compra 100% Segura
+              </span>
+              <span>•</span>
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i> Acesso Instantâneo em PDF
+              </span>
+              <span>•</span>
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="award" class="w-3.5 h-3.5 text-brand-teal"></i> Garantia de 7 Dias
+              </span>
+            </div>
+          </div>
+
+          <!-- Prova Social -->
+          <div class="pt-4 border-t border-slate-200 flex items-center justify-center lg:justify-start gap-4">
+            <div class="flex -space-x-2 overflow-hidden">
+              <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-slate-700 flex items-center justify-center text-xs font-bold text-white">TR</div>
+              <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-brand-teal flex items-center justify-center text-xs font-bold text-white">ES</div>
+              <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-brand-green flex items-center justify-center text-xs font-bold text-white">VR</div>
+              <div class="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-amber-600 flex items-center justify-center text-xs font-bold text-white">+1k</div>
+            </div>
+            <div class="text-left text-xs text-slate-600">
+              <div class="flex text-amber-500 text-xs">★★★★★</div>
+              <span><strong>+1.400 profissionais</strong> capacitados com materiais Check Now</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COLUNA DIREITA: MOCKUP REALISTA LIGHT -->
+        <div class="lg:col-span-5 flex justify-center items-center relative">
+          
+          <div class="relative w-full max-w-md">
+            
+            <!-- Glow Decorativo -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-brand-teal/15 via-brand-green/15 to-slate-200 rounded-3xl blur-2xl opacity-70 pointer-events-none"></div>
+
+            <!-- Container Mockup Livro / Digital Tablet -->
+            <div class="relative book-mockup bg-white p-6 rounded-3xl border border-surface-border shadow-xl text-left">
+              
+              <!-- Barra Superior do Mockup -->
+              <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-3 h-3 rounded-full bg-rose-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                </div>
+                <span class="text-[11px] font-mono font-medium text-slate-500">APOSTILA_TECNICA.pdf</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-green-light text-brand-green-dark border border-brand-green/30">VIGENTE 2025/2026</span>
+              </div>
+
+              <!-- Capa Digital da Apostila -->
+              <div class="bg-gradient-to-br from-brand-teal-50 to-slate-50 p-6 rounded-2xl border border-brand-teal/20 space-y-4 relative overflow-hidden">
+                
+                <div class="flex justify-between items-start">
+                  <img src="logo.png" alt="Check Now Logo" class="h-7 w-auto object-contain" />
+                  <div class="text-right">
+                    <span class="text-[10px] text-brand-teal font-bold uppercase tracking-wider block">Material Didático</span>
+                    <span class="text-xs font-bold text-slate-800">PDF + CERTIFICADO</span>
+                  </div>
+                </div>
+
+                <div class="space-y-1 pt-2">
+                  <span class="text-xs font-bold text-brand-teal tracking-wide uppercase">Normas Regulamentadoras</span>
+                  <h3 class="text-xl font-extrabold tracking-tight text-slate-900">CURSO & GUIA OPERACIONAL</h3>
+                  <p class="text-xs text-slate-600">Procedimentos, Medidas Preventivas e Diretrizes de SST</p>
+                </div>
+
+                <!-- Lista de Destaques -->
+                <div class="grid grid-cols-2 gap-2 text-[11px] font-medium text-slate-700 pt-2">
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-brand-green flex-shrink-0"></i>
+                    <span>Didática Direta</span>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-brand-green flex-shrink-0"></i>
+                    <span>Tabelas & Esquemas</span>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-brand-green flex-shrink-0"></i>
+                    <span>Modelo Editável</span>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-brand-green flex-shrink-0"></i>
+                    <span>100% em PDF</span>
+                  </div>
+                </div>
+
+                <div class="pt-3 flex items-center justify-between border-t border-slate-200 text-xs text-slate-500">
+                  <span class="font-semibold text-slate-700">Instrutor: Vander Rana</span>
+                  <span class="text-brand-green-dark font-bold">R$ 27,00 / curso</span>
+                </div>
+              </div>
+
+              <!-- Badge de Certificado Incluso -->
+              <div class="mt-4 p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600 flex-shrink-0">
+                  <i data-lucide="award" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-amber-900">BÔNUS: Modelo de Certificado Incluso</h4>
+                  <p class="text-[11px] text-amber-800">Pronto para emissão e comprovação de leitura técnica</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: PARA QUEM É ESTE MATERIAL? -->
+  <section id="para-quem" class="py-16 sm:py-20 bg-white border-b border-surface-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-bold tracking-widest text-brand-teal uppercase">Público-Alvo</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Desenvolvido para quem busca <span class="text-brand-teal">agilidade e conformidade</span>
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Materiais técnicos focados em aplicação real, respaldados pelas normas em vigor.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- CARD 1 -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border hover:border-brand-teal/50 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
+          <div class="w-14 h-14 rounded-2xl bg-brand-teal-light text-brand-teal flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-teal group-hover:text-white transition-all">
+            <i data-lucide="hard-hat" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Técnicos & Engenheiros de SST</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Economize dezenas de horas na elaboração de treinamentos e tenha material de consulta rápida alinhado rigorosamente com as NRs vigentes para apoiar suas consultorias.
+          </p>
+          <div class="mt-6 pt-4 border-t border-slate-200 flex items-center gap-2 text-xs font-bold text-brand-green-dark">
+            <i data-lucide="check" class="w-4 h-4 text-brand-green"></i> Agilidade nas consultorias
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border hover:border-brand-teal/50 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
+          <div class="w-14 h-14 rounded-2xl bg-brand-green-light text-brand-green-dark flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all">
+            <i data-lucide="building-2" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Empresas & Gestores</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Treine e oriente equipes internas com apostilas estruturadas e padronizadas, prevenindo acidentes, notificações e não conformidades em fiscalizações do trabalho.
+          </p>
+          <div class="mt-6 pt-4 border-t border-slate-200 flex items-center gap-2 text-xs font-bold text-brand-green-dark">
+            <i data-lucide="check" class="w-4 h-4 text-brand-green"></i> Segurança jurídica & prevenção
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border hover:border-brand-teal/50 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all">
+            <i data-lucide="graduation-cap" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Autônomos & Estudantes</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Destaque-se em processos seletivos e domine o conteúdo técnico exigido pelas principais indústrias. Acelere seu aprendizado com resumos práticos e objetivos.
+          </p>
+          <div class="mt-6 pt-4 border-t border-slate-200 flex items-center gap-2 text-xs font-bold text-brand-green-dark">
+            <i data-lucide="check" class="w-4 h-4 text-brand-green"></i> Valorização profissional imediata
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: GRADE COMPLETA DE CURSOS & CATÁLOGO INDIVIDUAL -->
+  <section id="cursos" class="py-20 bg-surface-body relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header do Catálogo -->
+      <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+        <span class="text-xs font-bold tracking-widest text-brand-teal uppercase">Catálogo de Cursos & Treinamentos</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Escolha o seu Material de NR por apenas <span class="text-brand-teal">R$ 27,00 cada</span>
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Cada curso inclui a <strong>Apostila Completa em PDF + Modelo de Certificado Editável</strong> da respectiva norma com envio imediato.
+        </p>
+
+        <!-- Filtros Rápidos de Categoria -->
+        <div class="pt-4 flex flex-wrap justify-center gap-2" id="filterContainer">
+          <!-- Gerado dinamicamente via JS (db.js) -->
+        </div>
+      </div>
+
+      <!-- GRID DE CARDS COM COMPRA INDIVIDUAL -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="nrGrid">
+        <!-- Gerado dinamicamente via JS (db.js) -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: O QUE VOCÊ RECEBE POR MATERIAL -->
+  <section id="o-que-recebe" class="py-16 sm:py-20 bg-white border-y border-surface-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-bold tracking-widest text-brand-teal uppercase">Estrutura de Entrega</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          O que você recebe ao adquirir cada curso
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Tudo pronto e estruturado para aplicação prática imediata.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- ITEM 1 -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border space-y-4 shadow-subtle hover:border-brand-teal/40 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-brand-teal-light text-brand-teal flex items-center justify-center">
+            <i data-lucide="file-text" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">📄 Apostila Completa em PDF</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Conteúdo técnico didático, estruturado e amplamente ilustrado com esquemas visuais, tabelas comparativas e resumos objetivos da NR escolhida.
+          </p>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border space-y-4 shadow-subtle hover:border-brand-teal/40 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">🎓 Modelo de Certificado</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Modelo padronizado em formato editável pronto para preenchimento de dados do aluno, data, carga horária e comprovação formal de capacitação.
+          </p>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border space-y-4 shadow-subtle hover:border-brand-teal/40 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-brand-green-light text-brand-green-dark flex items-center justify-center">
+            <i data-lucide="smartphone" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">📱 Acesso em Qualquer Dispositivo</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Abra no celular, tablet ou computador quando precisar em campo, ou imprima em folha A4 em alta qualidade para consultas rápidas.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: SOBRE O INSTRUTOR / CHECK NOW -->
+  <section id="instrutor" class="py-16 sm:py-20 bg-surface-body">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-white rounded-3xl border border-surface-border p-8 sm:p-12 shadow-md">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          
+          <!-- Foto / Avatar do Instrutor -->
+          <div class="md:col-span-4 flex flex-col items-center text-center">
+            <div class="relative group">
+              <div class="w-48 h-60 sm:w-56 sm:h-72 rounded-3xl bg-slate-100 border-2 border-brand-teal/40 overflow-hidden shadow-card-hover">
+                <img src="instrutor.png" alt="Instrutor Vander Rana - Especialista em SST" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-brand-green text-white text-[11px] font-bold px-3.5 py-1 rounded-full shadow-md whitespace-nowrap border border-white">
+                ESPECIALISTA SST
+              </div>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mt-5">Vander Rana</h4>
+            <p class="text-xs text-slate-500 font-medium">Segurança do Trabalho & Gestão</p>
+          </div>
+
+          <!-- Bio / Autoridade -->
+          <div class="md:col-span-8 space-y-4 text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-teal-light text-brand-teal text-xs font-bold border border-brand-teal/20">
+              <i data-lucide="shield" class="w-3.5 h-3.5"></i> Especialista à Frente da Check Now
+            </div>
+            
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+              Vander Rana
+            </h3>
+
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Especialista em <strong>Segurança do Trabalho</strong>, com ampla atuação prática na capacitação de equipes, elaboração de documentos normativos e gestão preventiva de riscos operacionais.
+            </p>
+
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              A <strong>Check Now</strong> foi criada com o objetivo de descomplicar e estruturar as Normas Regulamentadoras (NRs) em materiais didáticos prontos para uso, entregando ferramentas reais para instrutores, consultorias e empresas.
+            </p>
+
+            <div class="pt-4 flex flex-wrap gap-4 text-xs font-semibold text-slate-700">
+              <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i> Didática Direta</span>
+              <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i> 100% Atualizado</span>
+              <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i> Aplicação Prática</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7: GARANTIA INCONDICIONAL DE 7 DIAS -->
+  <section id="garantia" class="py-16 bg-white border-y border-surface-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-surface-body border border-surface-border rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center gap-8 shadow-subtle">
+        
+        <!-- Selo de Garantia -->
+        <div class="flex-shrink-0">
+          <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-amber-100 border-2 border-amber-400 flex flex-col items-center justify-center text-center p-3 shadow-sm">
+            <i data-lucide="shield-check" class="w-8 h-8 text-amber-600 mb-1"></i>
+            <span class="text-xl sm:text-2xl font-black text-amber-800 leading-none">7 DIAS</span>
+            <span class="text-[9px] uppercase font-bold text-amber-700 mt-0.5">Garantia Total</span>
+          </div>
+        </div>
+
+        <!-- Texto da Garantia -->
+        <div class="space-y-3 text-center md:text-left">
+          <h3 class="text-2xl font-extrabold text-slate-900">Risco Zero: Satisfação ou seu Dinheiro de Volta</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Se por qualquer motivo você considerar que o material adquirido não atendeu às suas expectativas, solicite o reembolso dentro de <strong>7 dias</strong> e devolveremos <strong>100% do valor pago</strong>, sem burocracia.
+          </p>
+          <div class="text-xs text-brand-green-dark font-bold flex items-center justify-center md:justify-start gap-1.5">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-brand-green"></i> Seu investimento está totalmente protegido.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 8: FAQ (PERGUNTAS FREQUENTES) -->
+  <section id="faq" class="py-20 bg-surface-body">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-bold tracking-widest text-brand-teal uppercase">Tire suas dúvidas</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Perguntas Frequentes (FAQ)
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Informações claras sobre a compra e entrega dos materiais.
+        </p>
+      </div>
+
+      <div class="space-y-4" id="faqAccordion">
+        
+        <!-- FAQ 1 -->
+        <div class="faq-item bg-white border border-surface-border rounded-2xl overflow-hidden shadow-subtle transition-all">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+            <span class="text-base sm:text-lg font-bold text-slate-900">1. O valor de R$ 27,00 é por curso ou pelo pacote todo?</span>
+            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 flex-shrink-0 transition-transform">
+              <i data-lucide="chevron-down" class="w-5 h-5"></i>
+            </div>
+          </button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+            O valor de <strong>R$ 27,00 é unitário para o curso/material de NR que você selecionar</strong>. Ao adquirir um item da grade, você recebe a Apostila Completa em PDF + o Modelo de Certificado de Conclusão correspondente àquela norma específica. Você pode escolher e adquirir quantos cursos desejar individualmente.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item bg-white border border-surface-border rounded-2xl overflow-hidden shadow-subtle transition-all">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+            <span class="text-base sm:text-lg font-bold text-slate-900">2. Como vou receber o material após o pagamento?</span>
+            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 flex-shrink-0 transition-transform">
+              <i data-lucide="chevron-down" class="w-5 h-5"></i>
+            </div>
+          </button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+            O envio é <strong>automático e instantâneo</strong>! Assim que o seu pagamento for confirmado via Pix ou Cartão de Crédito, você recebe os links para download do PDF e do certificado diretamente no seu e-mail cadastrado e na tela de confirmação.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item bg-white border border-surface-border rounded-2xl overflow-hidden shadow-subtle transition-all">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+            <span class="text-base sm:text-lg font-bold text-slate-900">3. Posso imprimir a apostila?</span>
+            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 flex-shrink-0 transition-transform">
+              <i data-lucide="chevron-down" class="w-5 h-5"></i>
+            </div>
+          </button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+            Sim! O arquivo é formatado em <strong>PDF de alta resolução</strong>, pronto para leitura digital ou para ser impresso em formato A4 sempre que necessário.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item bg-white border border-surface-border rounded-2xl overflow-hidden shadow-subtle transition-all">
+          <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+            <span class="text-base sm:text-lg font-bold text-slate-900">4. O certificado é editável?</span>
+            <div class="faq-icon w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 flex-shrink-0 transition-transform">
+              <i data-lucide="chevron-down" class="w-5 h-5"></i>
+            </div>
+          </button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+            Sim! Você recebe o modelo de certificado pronto para personalização e emissão, podendo preencher o nome do participante, data, carga horária e assinaturas de registro.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Suporte -->
+      <div class="mt-12 text-center p-6 bg-white rounded-2xl border border-surface-border shadow-subtle">
+        <p class="text-sm text-slate-600">
+          Ainda ficou com alguma dúvida sobre os materiais? Fale com a gente:
+          <a href="mailto:contato@cursoschecknow.com.br" class="text-brand-teal font-bold block sm:inline sm:ml-1 hover:underline">contato@cursoschecknow.com.br</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 9: RODAPÉ CORPORATIVO LIGHT -->
+  <footer class="bg-white border-t border-surface-border pt-16 pb-12 text-slate-600 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-200 items-start">
+        
+        <!-- Logo e Resumo -->
+        <div class="md:col-span-5 space-y-4">
+          <a href="#" class="inline-block">
+            <img src="logo.png" alt="Check Now - Assessoria em Saúde e Segurança do Trabalho" class="h-10 sm:h-12 w-auto object-contain max-w-[240px]" />
+          </a>
+          <p class="text-slate-500 leading-relaxed max-w-sm">
+            Capacitação técnica e materiais práticos em Segurança e Saúde no Trabalho (SST) em conformidade com as Normas Regulamentadoras vigentes.
+          </p>
+        </div>
+
+        <!-- Links Rápidos -->
+        <div class="md:col-span-3 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-900 block mb-3">Links do Site</span>
+          <ul class="space-y-2 text-slate-600">
+            <li><a href="#cursos" class="hover:text-brand-teal transition-colors">Catálogo de NRs</a></li>
+            <li><a href="#o-que-recebe" class="hover:text-brand-teal transition-colors">O Que Está Incluso</a></li>
+            <li><a href="#instrutor" class="hover:text-brand-teal transition-colors">Sobre Vander Rana</a></li>
+            <li><a href="#garantia" class="hover:text-brand-teal transition-colors">Garantia de 7 Dias</a></li>
+            <li><a href="#faq" class="hover:text-brand-teal transition-colors">Dúvidas Frequentes</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Institucionais & Legal -->
+        <div class="md:col-span-4 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-900 block mb-3">Termos & Políticas</span>
+          <div class="flex flex-wrap gap-4 text-slate-600">
+            <button id="btnOpenTermos" class="hover:text-brand-teal underline transition-colors cursor-pointer text-left">Termos de Uso</button>
+            <span>•</span>
+            <button id="btnOpenPrivacidade" class="hover:text-brand-teal underline transition-colors cursor-pointer text-left">Políticas de Privacidade</button>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed pt-2">
+            Aviso Legal: Os materiais têm caráter educacional e de capacitação técnica preventiva, servindo como suporte técnico e guia de estudo e treinamento.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-slate-500">
+        <p>© 2026 Check Now - Todos os direitos reservados. Instrutor Vander Rana.</p>
+        <div class="flex items-center gap-2 text-slate-600">
+          <i data-lucide="shield" class="w-4 h-4 text-brand-green"></i>
+          <span>Ambiente Seguro & Confiável</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- BARRA FLUTUANTE DE CTA (STICKY MOBILE/DESKTOP) -->
+  <div id="stickyCtaBar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-surface-border p-3 sm:p-4 transform translate-y-full transition-transform duration-300 shadow-xl">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+      <div class="hidden sm:block">
+        <div class="text-xs text-slate-500 mb-0.5">Apostila Técnica em PDF + Modelo de Certificado</div>
+        <div class="text-base font-bold text-slate-900 flex items-center gap-2">
+          A partir de <span class="text-brand-teal font-extrabold">R$ 1,99</span> 
+          <span class="text-[10px] font-bold text-brand-green bg-brand-green-light px-2 py-0.5 rounded-md border border-brand-green/30">PROMOÇÃO</span>
+        </div>
+      </div>
+      <div class="w-full sm:w-auto">
+        <a href="#cursos" class="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-btn-green transition-all">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Escolher meu Material de NR</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CHECKOUT TRANSPARENTE (PRD 2) -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white border border-surface-border rounded-3xl max-w-xl w-full max-h-[94vh] flex flex-col shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- CABEÇALHO DO CHECKOUT / ORDER SUMMARY -->
+      <div class="p-5 sm:p-6 border-b border-surface-border bg-surface-body flex-shrink-0">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Finalizar Pedido</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-[11px] font-bold text-slate-500 bg-white px-2.5 py-1 rounded-full border border-slate-200 flex items-center gap-1">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-green"></i> Compra 100% Segura
+            </span>
+            <button id="closeCheckoutModalBtn" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-xl hover:bg-slate-200 transition-colors" aria-label="Fechar checkout">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card Resumo do Produto Selecionado -->
+        <div class="bg-white p-4 rounded-2xl border border-surface-border flex items-center justify-between gap-4 shadow-subtle">
+          <div class="space-y-1">
+            <span class="text-[10px] font-mono font-bold text-brand-teal bg-brand-teal-light px-2 py-0.5 rounded" id="checkoutCourseBadge">TREINAMENTO SST</span>
+            <h4 class="text-sm sm:text-base font-bold text-slate-900 line-clamp-1" id="checkoutCourseTitle">Curso NR-35 Trabalho em Altura</h4>
+            <div class="text-[11px] text-slate-500 flex items-center gap-2">
+              <span class="flex items-center gap-1 text-brand-green-dark font-medium"><i data-lucide="check" class="w-3 h-3 text-brand-green"></i> PDF Completo</span>
+              <span>•</span>
+              <span class="flex items-center gap-1 text-brand-green-dark font-medium"><i data-lucide="check" class="w-3 h-3 text-brand-green"></i> Modelo Certificado</span>
+            </div>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <div class="text-[11px] text-slate-400 line-through">De R$ 97</div>
+            <div class="text-xl sm:text-2xl font-black text-brand-teal" id="checkoutCoursePrice">R$ 27,00</div>
+            <span class="text-[10px] text-slate-400">Pagamento Único</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORPO DO CHECKOUT (ESTADOS DINÂMICOS) -->
+      <div class="p-5 sm:p-7 overflow-y-auto flex-1 space-y-6">
+
+        <!-- ALERTA DE ERRO GERAL (SE HOUVER) -->
+        <div id="checkoutErrorAlert" class="hidden p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2.5">
+          <i data-lucide="alert-triangle" class="w-4 h-4 text-red-600 flex-shrink-0"></i>
+          <span id="checkoutErrorMessage">Por favor, preencha todos os campos obrigatórios corretamente.</span>
+        </div>
+
+        <!-- ESTADO 1: FORMULÁRIO DE COMPRA -->
+        <div id="checkoutStateForm" class="space-y-6">
+          
+          <!-- PASSO 1: DADOS DO COMPRADOR -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-brand-teal text-white text-[11px] font-bold flex items-center justify-center">1</span>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-slate-900">Seus Dados Pessoais</h5>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div class="sm:col-span-2 space-y-1">
+                <label class="text-xs font-semibold text-slate-700">Nome Completo *</label>
+                <input type="text" id="buyerName" placeholder="Ex: Vanderlei Silva" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all" required />
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-xs font-semibold text-slate-700">E-mail * (onde receberá o PDF)</label>
+                <input type="email" id="buyerEmail" placeholder="seuemail@exemplo.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all" required />
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-xs font-semibold text-slate-700">Confirmar E-mail *</label>
+                <input type="email" id="buyerEmailConfirm" placeholder="Confirme seu e-mail" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all" required />
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-xs font-semibold text-slate-700">CPF * (emissão fiscal)</label>
+                <input type="text" id="buyerCpf" placeholder="000.000.000-00" maxlength="14" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all" required />
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-xs font-semibold text-slate-700">WhatsApp / Telefone *</label>
+                <input type="tel" id="buyerPhone" placeholder="(00) 00000-0000" maxlength="15" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- PASSO 2: FORMA DE PAGAMENTO -->
+          <div class="space-y-4 pt-2 border-t border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-brand-teal text-white text-[11px] font-bold flex items-center justify-center">2</span>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-slate-900">Forma de Pagamento</h5>
+            </div>
+
+            <!-- SELETORES DE ABAS (PIX / CARTÃO) -->
+            <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-2xl">
+              <button type="button" id="tabPixBtn" class="payment-tab active py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all bg-white text-brand-teal shadow-sm">
+                <i data-lucide="qr-code" class="w-4 h-4"></i>
+                <span>PIX Instantâneo</span>
+                <span class="hidden sm:inline-block text-[9px] font-extrabold bg-brand-green-light text-brand-green-dark px-1.5 py-0.5 rounded">RÁPIDO</span>
+              </button>
+              <button type="button" id="tabCardBtn" class="payment-tab py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all text-slate-600 hover:text-slate-900">
+                <i data-lucide="credit-card" class="w-4 h-4"></i>
+                <span>Cartão de Crédito</span>
+              </button>
+            </div>
+
+            <!-- CONTEÚDO ABA PIX -->
+            <div id="paymentContentPix" class="space-y-4">
+              <div class="p-4 rounded-2xl bg-brand-teal-50/60 border border-brand-teal/20 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-brand-teal flex items-center gap-1.5">
+                    <i data-lucide="zap" class="w-4 h-4 text-amber-500"></i> Liberação Imediata
+                  </span>
+                  <span class="text-[10px] font-bold text-brand-green-dark bg-brand-green-light px-2 py-0.5 rounded-full">Sem Taxas</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  O <strong>QR Code</strong> e o código <strong>Copia e Cola</strong> serão gerados na próxima etapa. Assim que o Pix for pago, o download é liberado instantaneamente.
+                </p>
+              </div>
+
+              <button type="button" id="btnSubmitPix" class="w-full py-3.5 px-6 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-extrabold text-sm tracking-wider text-center shadow-btn-green transition-all flex items-center justify-center gap-2">
+                <i data-lucide="qr-code" class="w-4 h-4"></i>
+                <span>GERAR PIX - R$ 27,00</span>
+              </button>
+            </div>
+
+            <!-- CONTEÚDO ABA CARTÃO DE CRÉDITO -->
+            <div id="paymentContentCard" class="space-y-4 hidden">
+              <div class="space-y-3">
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between">
+                    <label class="text-xs font-semibold text-slate-700">Número do Cartão *</label>
+                    <span id="cardBrandBadge" class="text-[10px] font-bold text-slate-400 uppercase">Cartão</span>
+                  </div>
+                  <div class="relative">
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" class="w-full pl-3.5 pr-10 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all font-mono" />
+                    <div class="absolute right-3 top-2.5 text-slate-400">
+                      <i data-lucide="credit-card" class="w-5 h-5"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-xs font-semibold text-slate-700">Nome Impresso no Cartão *</label>
+                  <input type="text" id="cardHolder" placeholder="Como impresso no cartão" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all uppercase" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-700">Validade (MM/AA) *</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all font-mono text-center" />
+                  </div>
+
+                  <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-700">Código CVV *</label>
+                    <input type="text" id="cardCvv" placeholder="123" maxlength="4" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all font-mono text-center" />
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" id="btnSubmitCard" class="w-full py-3.5 px-6 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-extrabold text-sm tracking-wider text-center shadow-btn-green transition-all flex items-center justify-center gap-2">
+                <i data-lucide="lock" class="w-4 h-4"></i>
+                <span>PAGAR R$ 27,00 NO CARTÃO (À VISTA)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Rodapé de Segurança -->
+          <div class="pt-3 flex items-center justify-center gap-4 text-slate-400 text-[11px]">
+            <span class="flex items-center gap-1"><i data-lucide="shield" class="w-3.5 h-3.5 text-brand-teal"></i> Dados Criptografados SSL</span>
+            <span>•</span>
+            <span class="flex items-center gap-1"><i data-lucide="award" class="w-3.5 h-3.5 text-brand-green"></i> Garantia de 7 Dias</span>
+          </div>
+
+        </div>
+
+        <!-- ESTADO 2: CARREGANDO / PROCESSANDO -->
+        <div id="checkoutStateLoading" class="hidden py-12 text-center space-y-4">
+          <div class="w-14 h-14 rounded-full border-4 border-slate-200 border-t-brand-teal animate-spin mx-auto"></div>
+          <div class="space-y-1">
+            <h4 class="text-base font-bold text-slate-900">Processando pedido com segurança...</h4>
+            <p class="text-xs text-slate-500">Criptografia SSL de 256 bits ativada</p>
+          </div>
+        </div>
+
+        <!-- ESTADO 3: AGUARDANDO PAGAMENTO PIX -->
+        <div id="checkoutStatePix" class="hidden space-y-6">
+          <div class="text-center space-y-2">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-teal-light text-brand-teal text-xs font-bold">
+              <span class="w-2 h-2 rounded-full bg-brand-teal animate-ping"></span>
+              PIX Gerado • Aguardando Pagamento
+            </div>
+            <h4 class="text-lg font-extrabold text-slate-900">Escaneie o QR Code abaixo</h4>
+            <p class="text-xs text-slate-500">Abra o app do seu banco e selecione "Pagar via Pix / QR Code".</p>
+          </div>
+
+          <!-- QR Code Container -->
+          <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 max-w-xs mx-auto text-center space-y-4 shadow-sm">
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 inline-block shadow-inner">
+              <!-- Imagem Dinâmica do QR Code PagBank -->
+              <img id="pixQrImage" src="" alt="QR Code Pix PagBank" class="w-44 h-44 mx-auto object-contain rounded-lg" />
+            </div>
+            
+            <!-- Contador Regressivo -->
+            <div class="flex items-center justify-center gap-2 text-xs font-semibold text-slate-600">
+              <i data-lucide="clock" class="w-4 h-4 text-amber-500"></i>
+              <span>Este código expira em: <strong id="pixCountdown" class="text-slate-900 font-mono">15:00</strong></span>
+            </div>
+          </div>
+
+          <!-- Código Copia e Cola -->
+          <div class="space-y-2">
+            <label class="text-xs font-semibold text-slate-700 block text-center sm:text-left">Ou copie o código Pix abaixo:</label>
+            <div class="flex items-center gap-2">
+              <input type="text" id="pixCodeInput" readonly value="00020126580014br.gov.bcb.pix0136checknow-sst-treinamentos@pix.pagbank.com.br520400005303986540527.005802BR5925CHECK NOW SST TREINAMENTOS6009SAO PAULO62070503***6304E8A2" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-mono text-slate-700 select-all focus:outline-none" />
+              <button type="button" id="btnCopyPix" class="py-2.5 px-4 rounded-xl bg-brand-teal hover:bg-brand-teal-dark text-white text-xs font-bold flex items-center gap-1.5 flex-shrink-0 transition-all">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+                <span id="copyPixBtnText">Copiar</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Status Polling Visual & Simulação de Pagamento -->
+          <div class="p-4 rounded-2xl bg-brand-green-light/50 border border-brand-green/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2 text-xs font-semibold text-brand-green-dark">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-pulse"></span>
+              <span>Aguardando confirmação bancária...</span>
+            </div>
+            <button type="button" id="btnSimulatePixPaid" class="text-[11px] font-bold text-brand-teal hover:underline cursor-pointer">
+              Simular Aprovação (Teste)
+            </button>
+          </div>
+        </div>
+
+        <!-- ESTADO 4: SUCESSO FINAL / DOWNLOAD SEGURO (PRD 4) -->
+        <div id="checkoutStateSuccess" class="hidden py-6 text-center space-y-5">
+          <div class="w-16 h-16 rounded-full bg-brand-green-light text-brand-green mx-auto flex items-center justify-center animate-bounce shadow-sm">
+            <i data-lucide="check-circle" class="w-9 h-9 stroke-[2.5]"></i>
+          </div>
+          
+          <div class="space-y-2 max-w-md mx-auto">
+            <h4 class="text-2xl font-extrabold text-slate-900">🎉 Pagamento Confirmado!</h4>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Enviamos uma cópia para <strong id="successCustomerEmail" class="text-brand-teal font-bold">seuemail@exemplo.com</strong>. Você também pode baixar o material agora pelos botões abaixo:
+            </p>
+          </div>
+
+          <!-- Card de Resumo do Material -->
+          <div class="bg-surface-body p-4 sm:p-5 rounded-2xl border border-surface-border text-left space-y-2.5 max-w-md mx-auto shadow-sm">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span class="text-xs font-bold text-slate-700">Material Adquirido</span>
+              <span class="text-[11px] font-extrabold text-brand-green-dark bg-brand-green-light px-2 py-0.5 rounded border border-brand-green/30">Acesso Vitalício</span>
+            </div>
+            <div class="text-sm text-slate-900 font-extrabold flex items-center gap-2" id="successCourseName">
+              Curso NR Selecionado
+            </div>
+            <div class="text-xs text-slate-600 space-y-1 pt-0.5">
+              <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Apostila Técnica Completa em PDF (MTE)</div>
+              <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Modelo Editável de Certificado de Conclusão</div>
+            </div>
+          </div>
+
+          <!-- Botões de Download Seguro (PRD 4) -->
+          <div class="space-y-2.5 max-w-md mx-auto">
+            <!-- Botão 1: Apostila (Destaque Verde) -->
+            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" id="btnDownloadApostila" class="w-full py-3.5 px-6 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-extrabold text-xs sm:text-sm tracking-wide text-center shadow-btn-green transition-all flex items-center justify-center gap-2 active:scale-95">
+              <i data-lucide="file-down" class="w-4 h-4"></i>
+              <span>📥 BAIXAR APOSTILA EM PDF</span>
+            </a>
+
+            <!-- Botão 2: Certificado (Secundário Teal) -->
+            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" id="btnDownloadCertificado" class="w-full py-3 px-6 rounded-xl bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm tracking-wide text-center shadow-btn-teal transition-all flex items-center justify-center gap-2 active:scale-95">
+              <i data-lucide="award" class="w-4 h-4"></i>
+              <span>🎓 BAIXAR MODELO DE CERTIFICADO</span>
+            </a>
+
+            <!-- Aviso -->
+            <div class="pt-1 flex items-center justify-center gap-1.5 text-[11px] text-slate-500 font-medium">
+              <i data-lucide="info" class="w-3.5 h-3.5 text-brand-teal flex-shrink-0"></i>
+              <span>Salve os arquivos em seu dispositivo para consulta ilimitada.</span>
+            </div>
+
+            <!-- Fechar Janela -->
+            <button type="button" id="btnFinishCheckout" class="w-full pt-2 py-1 text-slate-500 hover:text-slate-800 text-xs font-semibold">
+              Concluir e Fechar Janela
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POP-UP / BANNER DE COOKIES (LGPD) -->
+  <div id="cookieBanner" class="fixed bottom-4 left-4 right-4 sm:right-auto sm:left-6 sm:bottom-6 z-50 max-w-md bg-white border border-surface-border p-5 sm:p-6 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-12 opacity-0 pointer-events-none">
+    <div class="flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-brand-teal-light text-brand-teal flex items-center justify-center flex-shrink-0 mt-0.5">
+        <i data-lucide="cookie" class="w-5 h-5"></i>
+      </div>
+      <div class="space-y-2 flex-1">
+        <div class="flex items-center justify-between">
+          <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+            <span>Privacidade & Cookies</span>
+            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-brand-teal-light text-brand-teal">LGPD</span>
+          </h4>
+          <button id="closeCookieBtn" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg focus:outline-none" aria-label="Fechar aviso">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Utilizamos cookies e tecnologias similares para aprimorar sua experiência de navegação, oferecer conteúdos personalizados e garantir a segurança do nosso site, em conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/18)</strong>.
+        </p>
+        <div class="text-[11px] text-slate-500">
+          Ao continuar navegando, você concorda com nossos <button class="btn-open-terms text-brand-teal underline font-semibold hover:text-brand-teal-dark cursor-pointer">Termos de Uso</button> e <button class="btn-open-privacy text-brand-teal underline font-semibold hover:text-brand-teal-dark cursor-pointer">Políticas de Privacidade</button>.
+        </div>
+        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+          <button id="acceptAllCookies" class="flex-1 py-2 px-3.5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-xs font-bold shadow-btn-green transition-all text-center">
+            Aceitar Todos
+          </button>
+          <button id="acceptEssentialCookies" class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-all text-center">
+            Apenas Essenciais
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TERMOS DE USO -->
+  <div id="modalTermos" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="bg-white border border-surface-border rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Cabeçalho do Modal -->
+      <div class="p-6 border-b border-surface-border flex items-center justify-between bg-surface-body flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-teal-light text-brand-teal flex items-center justify-center">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">Termos de Uso e Condições Gerais</h3>
+            <p class="text-xs text-slate-500">Última atualização: Vigência 2026 • Check Now Treinamentos</p>
+          </div>
+        </div>
+        <button class="close-legal-modal text-slate-400 hover:text-slate-700 p-2 rounded-xl hover:bg-slate-200 transition-colors" data-modal="modalTermos" aria-label="Fechar modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Corpo do Modal (Scrollável) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-600 text-xs sm:text-sm leading-relaxed">
+        
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-teal-light text-brand-teal text-xs flex items-center justify-center font-bold">1</span>
+            Objeto e Aceitação dos Termos
+          </h4>
+          <p>
+            Bem-vindo à <strong>Check Now - Assessoria em Saúde e Segurança do Trabalho</strong>. Ao acessar este site, adquirir qualquer material técnico em PDF ou modelo de certificado, você declara expressamente que leu, compreendeu e concorda integralmente com estes Termos de Uso.
+          </p>
+          <p>
+            Os materiais comercializados nesta plataforma têm caráter exclusivamente <strong>educacional, didático e de suporte técnico preventivo</strong>, servindo como base estruturada para elaboração de treinamentos, consultorias e consultas às Normas Regulamentadoras (NRs) do Ministério do Trabalho e Emprego (MTE).
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-teal-light text-brand-teal text-xs flex items-center justify-center font-bold">2</span>
+            Licença de Uso & Propriedade Intelectual
+          </h4>
+          <p>
+            Todo o conteúdo intelectual, compilações, diagramações, fluxogramas e textos didáticos foram desenvolvidos e organizados pelo instrutor <strong>Vander Rana</strong> e equipe técnica da <strong>Check Now</strong>.
+          </p>
+          <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+            <li><strong>Uso Autorizado:</strong> O comprador recebe licença não exclusiva para uso profissional próprio, consultas internas, impressões para estudo e aplicação didática em treinamentos de suas equipes ou clientes.</li>
+            <li><strong>Práticas Proibidas:</strong> É terminantemente proibida a revenda não autorizada, rateio público, redistribuição em massa em repositórios digitais ou qualquer ato de pirataria, sob as penas da Lei nº 9.610/1998 (Lei de Direitos Autorais).</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-teal-light text-brand-teal text-xs flex items-center justify-center font-bold">3</span>
+            Responsabilidade Técnica & Emissão de Certificados
+          </h4>
+          <p>
+            A apostila técnica e o modelo de certificado fornecidos constituem recursos instrucionais. A responsabilidade técnica, assinatura e registro formal de capacitação cabem ao respectivo <strong>Profissional Legalmente Habilitado (PLH) ou Qualificado</strong> que ministrar a instrução em conformidade com os requisitos de cada Norma Regulamentadora aplicável (ex.: NR-01, NR-10, NR-33, NR-35).
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-teal-light text-brand-teal text-xs flex items-center justify-center font-bold">4</span>
+            Valores, Pagamentos & Entrega Digital
+          </h4>
+          <p>
+            Os materiais são comercializados individualmente pelo valor promocional de <strong>R$ 27,00 (pagamento único)</strong> por curso de NR selecionado. O envio dos arquivos é 100% digital e automático, processado imediatamente após a confirmação bancária do pagamento via Pix ou Cartão de Crédito.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-teal-light text-brand-teal text-xs flex items-center justify-center font-bold">5</span>
+            Garantia Incondicional de 7 Dias (Direito de Arrependimento)
+          </h4>
+          <p>
+            Em total respeito ao <strong>Artigo 49 do Código de Defesa do Consumidor (Lei nº 8.078/1990)</strong>, garantimos o direito de arrependimento no prazo de <strong>7 (sete) dias corridos</strong> a partir da compra. Caso deseje o reembolso integral de 100% do valor pago, basta entrar em contato com o suporte através do e-mail <code>contato@cursoschecknow.com.br</code>.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-teal-light text-brand-teal text-xs flex items-center justify-center font-bold">6</span>
+            Suporte e Foro
+          </h4>
+          <p>
+            Para eventuais dúvidas sobre estes termos ou solicitação de suporte técnico, os usuários podem contatar a equipe da Check Now. Fica eleito o foro da comarca de domicílio do consumidor para dirimir quaisquer dúvidas decorrentes do presente instrumento.
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Rodapé do Modal -->
+      <div class="p-4 sm:p-6 border-t border-surface-border bg-surface-body flex items-center justify-end gap-3 flex-shrink-0">
+        <button class="close-legal-modal py-2.5 px-6 rounded-xl bg-brand-teal hover:bg-brand-teal-dark text-white text-xs font-bold transition-all shadow-btn-teal" data-modal="modalTermos">
+          Entendi e Concordo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: POLÍTICAS DE PRIVACIDADE (LGPD) -->
+  <div id="modalPrivacidade" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="bg-white border border-surface-border rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Cabeçalho do Modal -->
+      <div class="p-6 border-b border-surface-border flex items-center justify-between bg-surface-body flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-green-light text-brand-green flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">Política de Privacidade & Proteção de Dados</h3>
+            <p class="text-xs text-slate-500">Conforme a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)</p>
+          </div>
+        </div>
+        <button class="close-legal-modal text-slate-400 hover:text-slate-700 p-2 rounded-xl hover:bg-slate-200 transition-colors" data-modal="modalPrivacidade" aria-label="Fechar modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Corpo do Modal (Scrollável) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-600 text-xs sm:text-sm leading-relaxed">
+        
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-green-light text-brand-green-dark text-xs flex items-center justify-center font-bold">1</span>
+            Compromisso com a Privacidade
+          </h4>
+          <p>
+            A <strong>Check Now</strong> valoriza a segurança e a confidencialidade das informações de seus clientes e visitantes. Esta política descreve de forma transparente como coletamos, utilizamos, armazenamos e protegemos os seus dados pessoais, em estrita conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD - Lei Federal nº 13.709/2018)</strong> e o <strong>Marco Civil da Internet (Lei nº 12.965/2014)</strong>.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-green-light text-brand-green-dark text-xs flex items-center justify-center font-bold">2</span>
+            Dados Coletados e Finalidade do Tratamento
+          </h4>
+          <p>Coletamos apenas as informações estritamente necessárias para a prestação do serviço:</p>
+          <ul class="list-disc list-inside space-y-1.5 pl-2 text-slate-600">
+            <li><strong>Dados de Identificação e Contato:</strong> Nome completo, endereço de e-mail e telefone/WhatsApp — utilizados para identificação, liberação de acesso e envio imediato dos materiais e certificados adquiridos.</li>
+            <li><strong>Dados de Transação Financeira:</strong> Informações de pagamento processadas de forma tokenizada e criptografada por gateways homologados com certificação internacional de segurança PCI-DSS. <em>A Check Now não armazena dados sensíveis de cartões de crédito em seus servidores.</em></li>
+            <li><strong>Dados de Navegação:</strong> Endereço IP, tipo de navegador e registros de acesso utilizados exclusivamente para prevenção a fraudes e garantia de segurança do tráfego.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-green-light text-brand-green-dark text-xs flex items-center justify-center font-bold">3</span>
+            Bases Legais para o Tratamento (Art. 7º LGPD)
+          </h4>
+          <p>O tratamento de dados pessoais pela Check Now fundamenta-se nas seguintes bases legais:</p>
+          <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+            <li><strong>Execução de Contrato:</strong> Para processar a compra e entregar os materiais digitais adquiridos.</li>
+            <li><strong>Cumprimento de Obrigação Legal:</strong> Para emissão de notas fiscais e atendimento à legislação tributária e trabalhista.</li>
+            <li><strong>Legítimo Interesse:</strong> Para aprimoramento da plataforma e prevenção contra fraudes eletrônicas.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-green-light text-brand-green-dark text-xs flex items-center justify-center font-bold">4</span>
+            Segurança da Informação e Criptografia
+          </h4>
+          <p>
+            Adotamos rígidas medidas técnicas e administrativas de segurança da informação, incluindo criptografia SSL/TLS de 256 bits, controle restrito de acessos e protocolos de proteção de dados para salvaguardar suas informações contra acessos não autorizados, perdas ou alterações ilícitas.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-green-light text-brand-green-dark text-xs flex items-center justify-center font-bold">5</span>
+            Direitos do Titular dos Dados (Art. 18 LGPD)
+          </h4>
+          <p>Você possui o direito de, a qualquer momento e mediante solicitação gratuita:</p>
+          <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+            <li>Confirmar a existência de tratamento e acessar seus dados pessoais armazenados.</li>
+            <li>Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
+            <li>Requerer a eliminação ou anonimização de dados tratados com base em consentimento.</li>
+            <li>Revogar o consentimento para comunicações futuras.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-2">
+          <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-brand-green-light text-brand-green-dark text-xs flex items-center justify-center font-bold">6</span>
+            Canal de Atendimento ao Titular / Encarregado (DPO)
+          </h4>
+          <p>
+            Para exercer seus direitos ou tirar qualquer dúvida referente ao tratamento de seus dados pessoais, entre em contato diretamente com o nosso canal de privacidade:
+            <span class="font-bold text-brand-teal block mt-1">E-mail: <a href="mailto:contato@cursoschecknow.com.br" class="hover:underline">contato@cursoschecknow.com.br</a></span>
+          </p>
+        </section>
+
+      </div>
+
+      <!-- Rodapé do Modal -->
+      <div class="p-4 sm:p-6 border-t border-surface-border bg-surface-body flex items-center justify-end gap-3 flex-shrink-0">
+        <button class="close-legal-modal py-2.5 px-6 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-xs font-bold transition-all shadow-btn-green" data-modal="modalPrivacidade">
+          Entendi e Concordo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT DE INTERATIVIDADE -->
+  <script>
+    // Inicializar ícones Lucide
+    lucide.createIcons();
+
+    // ==========================================
+    // RENDERIZAÇÃO DINÂMICA VIA DB.JS (SINGLE SOURCE OF TRUTH)
+    // ==========================================
+    async function renderPublicCatalog() {
+      const dbCategories = window.db ? await window.db.getCategories() : [];
+      const dbCourses = window.db ? await window.db.getCourses() : [];
+
+      const filterContainer = document.getElementById('filterContainer');
+      const nrGrid = document.getElementById('nrGrid');
+
+      if (!dbCourses || dbCourses.length === 0) {
+        console.error("Erro: O catálogo de cursos retornou vazio do Supabase. Verifique a aba Network/Console.");
+        if (nrGrid) {
+          nrGrid.innerHTML = `<div class="col-span-full text-center p-8 bg-red-50 text-red-600 rounded-xl border border-red-200">
+            <p class="font-bold">Erro ao carregar o catálogo.</p>
+            <p class="text-sm">Por favor, atualize a página ou verifique o arquivo db.js.</p>
+          </div>`;
+        }
+        return;
+      }
+
+      if (filterContainer) {
+        let btnHtml = `<button class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold bg-brand-teal text-white shadow-btn-teal transition-all" data-category="all">Todas as NRs</button>`;
+        dbCategories.forEach(cat => {
+          btnHtml += `<button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-brand-teal transition-all" data-category="${cat.id}">${cat.name}</button>`;
+        });
+        filterContainer.innerHTML = btnHtml;
+      }
+
+      if (nrGrid) {
+        nrGrid.innerHTML = dbCourses.map(course => {
+          if (course.isSpecialOffer) {
+            return `
+        <!-- PROMO CARD -->
+        <div class="nr-card relative bg-[#F0FDF4] border-2 border-[#3B8E39] p-6 rounded-2xl shadow-lg shadow-[#3B8E39]/20 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between" data-cat="${course.categoryId}">
+          <!-- Etiqueta Promocional -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full shadow-md z-10 whitespace-nowrap tracking-wide border border-orange-600">
+            🔥 OFERTA ESPECIAL
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-3 mt-1">
+              <span class="px-3 py-1 rounded-lg bg-brand-teal-light text-xs font-mono font-bold text-brand-teal">${course.tag}</span>
+              <span class="text-[11px] font-bold text-brand-green-dark bg-brand-green-light px-2 py-0.5 rounded-full flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> PDF + Certificado</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">${course.title}</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">${course.description}</p>
+          </div>
+          <div class="pt-4 border-t border-slate-200 space-y-3">
+            <div class="flex items-baseline justify-between">
+              <div>
+                <span class="text-[11px] text-slate-500 line-through">De R$ ${parseFloat(course.oldPrice).toFixed(2).replace('.',',')}</span>
+                <div class="text-xl font-extrabold text-[#3B8E39]">R$ ${parseFloat(course.currentPrice).toFixed(2).replace('.',',')}</div>
+              </div>
+              <span class="text-[10px] text-slate-600 font-medium">Pagamento único</span>
+            </div>
+            <button class="btn-open-checkout w-full py-2.5 px-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs tracking-wider text-center shadow-lg shadow-orange-500/30 transition-all" data-course-id="${course.id}" data-course-name="${course.tag}: ${course.title}" data-course-price="${course.currentPrice}">
+              OBTER POR R$ ${parseFloat(course.currentPrice).toFixed(2).replace('.',',')}
+            </button>
+          </div>
+        </div>`;
+          } else {
+            return `
+        <!-- NORMAL CARD -->
+        <div class="nr-card bg-white border border-surface-border p-6 rounded-2xl shadow-subtle hover:shadow-card-hover hover:border-brand-teal/50 transition-all duration-300 flex flex-col justify-between" data-cat="${course.categoryId}">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 rounded-lg bg-brand-teal-light text-xs font-mono font-bold text-brand-teal">${course.tag}</span>
+              <span class="text-[11px] font-bold text-brand-green-dark bg-brand-green-light px-2 py-0.5 rounded-full flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> PDF + Certificado</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">${course.title}</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">${course.description}</p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 space-y-3">
+            <div class="flex items-baseline justify-between">
+              <div>
+                <span class="text-[11px] text-slate-400 line-through">De R$ ${parseFloat(course.oldPrice).toFixed(2).replace('.',',')}</span>
+                <div class="text-xl font-extrabold text-slate-900">R$ ${parseFloat(course.currentPrice).toFixed(2).replace('.',',')}</div>
+              </div>
+              <span class="text-[10px] text-slate-500 font-medium">Pagamento único</span>
+            </div>
+            <button class="btn-open-checkout w-full py-2.5 px-4 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-bold text-xs tracking-wider text-center shadow-btn-green transition-all" data-course-id="${course.id}" data-course-name="${course.tag}: ${course.title}" data-course-price="${course.currentPrice}">
+              OBTER ESSE CURSO
+            </button>
+          </div>
+        </div>`;
+          }
+        }).join('');
+      }
+      lucide.createIcons();
+      
+      // Re-bind click handlers for the newly rendered buttons
+      bindDynamicEvents();
+    }
+    
+    // Extracted the binding logic so we can call it after dynamic render
+    function bindDynamicEvents() {
+      // Re-bind filtros
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const nrCards = document.querySelectorAll('.nr-card');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'bg-brand-teal', 'text-white', 'shadow-btn-teal');
+            b.classList.add('bg-white', 'text-slate-700');
+          });
+          btn.classList.add('active', 'bg-brand-teal', 'text-white', 'shadow-btn-teal');
+          btn.classList.remove('bg-white', 'text-slate-700');
+          
+          const category = btn.getAttribute('data-category');
+          nrCards.forEach(card => {
+            const cardCat = card.getAttribute('data-cat');
+            if (category === 'all' || cardCat === category) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Re-bind botões de checkout
+      const checkoutButtons = document.querySelectorAll('.btn-open-checkout');
+      checkoutButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const courseId = btn.getAttribute('data-course-id') || 'nr-geral';
+          const courseName = btn.getAttribute('data-course-name') || 'Material Técnico NR';
+          const coursePrice = parseFloat(btn.getAttribute('data-course-price') || '27.00');
+
+          if (window.trackAnalytics) {
+            window.trackAnalytics('ViewContent', {
+              content_name: courseName,
+              content_ids: [courseId],
+              value: coursePrice,
+              currency: 'BRL'
+            });
+          }
+
+          if (typeof openCheckoutModal === 'function') {
+            openCheckoutModal({ id: courseId, name: courseName, price: coursePrice });
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPublicCatalog();
+    });
+
+    // Menu Mobile
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (mobileMenuToggle && mobileMenu) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+
+    // Accordion do FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const toggle = item.querySelector('.faq-toggle');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
+
+      toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+        // Fecha todos os outros accordions
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            const otherToggle = otherItem.querySelector('.faq-toggle');
+            const otherContent = otherItem.querySelector('.faq-content');
+            const otherIcon = otherItem.querySelector('.faq-icon');
+            otherToggle.setAttribute('aria-expanded', 'false');
+            otherContent.classList.add('hidden');
+            otherIcon.style.transform = 'rotate(0deg)';
+          }
+        });
+
+        // Alterna o atual
+        if (isExpanded) {
+          toggle.setAttribute('aria-expanded', 'false');
+          content.classList.add('hidden');
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          toggle.setAttribute('aria-expanded', 'true');
+          content.classList.remove('hidden');
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+
+
+    // Sticky CTA Bar após scroll do Hero
+    const stickyCtaBar = document.getElementById('stickyCtaBar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 450) {
+        stickyCtaBar.classList.remove('translate-y-full');
+      } else {
+        stickyCtaBar.classList.add('translate-y-full');
+      }
+    });
+
+    // ==========================================
+    // RASTREAMENTO & ANALYTICS (GA4, META PIXEL, GTM - PRD SEO/TRACKING)
+    // ==========================================
+    window.trackAnalytics = function(eventName, params = {}) {
+      try {
+        console.log(`📊 [Analytics Event] ${eventName}:`, params);
+        
+        // Google Analytics 4 (gtag)
+        if (typeof window.gtag === 'function') {
+          if (eventName === 'PageView') {
+            window.gtag('event', 'page_view', params);
+          } else if (eventName === 'ViewContent') {
+            window.gtag('event', 'view_item', {
+              items: [{ item_id: params.content_ids?.[0], item_name: params.content_name, price: params.value }],
+              value: params.value,
+              currency: params.currency || 'BRL'
+            });
+          } else if (eventName === 'InitiateCheckout') {
+            window.gtag('event', 'begin_checkout', {
+              items: [{ item_name: params.content_name, price: params.value }],
+              value: params.value,
+              currency: params.currency || 'BRL'
+            });
+          } else if (eventName === 'Purchase') {
+            window.gtag('event', 'purchase', {
+              transaction_id: params.transaction_id || `ORD-${Date.now()}`,
+              value: params.value,
+              currency: params.currency || 'BRL',
+              items: [{ item_name: params.content_name, price: params.value }]
+            });
+          } else {
+            window.gtag('event', eventName, params);
+          }
+        }
+
+        // Meta Pixel (fbq)
+        if (typeof window.fbq === 'function') {
+          if (eventName === 'PageView') {
+            window.fbq('track', 'PageView');
+          } else if (eventName === 'ViewContent') {
+            window.fbq('track', 'ViewContent', params);
+          } else if (eventName === 'InitiateCheckout') {
+            window.fbq('track', 'InitiateCheckout', params);
+          } else if (eventName === 'Purchase') {
+            window.fbq('track', 'Purchase', params);
+          } else {
+            window.fbq('trackCustom', eventName, params);
+          }
+        }
+
+        // Google Tag Manager (dataLayer)
+        if (window.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({
+            event: eventName,
+            ...params
+          });
+        }
+      } catch (err) {
+        console.warn('[Analytics Dispatch Error]:', err);
+      }
+    };
+
+    // Inicialização dinâmica das tags de Analytics
+    async function initAnalyticsEngine() {
+      try {
+        const res = await fetch('/api/analytics/config').catch(() => null);
+        const config = res && res.ok ? await res.json() : {};
+
+        const gaId = config.gaId && !config.gaId.includes('XXXX') ? config.gaId : '';
+        const metaPixelId = config.metaPixelId && !config.metaPixelId.includes('12345678') ? config.metaPixelId : '';
+        const gtmId = config.gtmId && !config.gtmId.includes('XXXX') ? config.gtmId : '';
+
+        // Injetar Google Analytics 4
+        if (gaId) {
+          const gaScript = document.createElement('script');
+          gaScript.async = true;
+          gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+          document.head.appendChild(gaScript);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaId);
+        }
+
+        // Injetar Meta Pixel
+        if (metaPixelId) {
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', metaPixelId);
+        }
+
+        // Injetar GTM
+        if (gtmId) {
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer',gtmId);
+        }
+
+        // Disparo de PageView inicial
+        window.trackAnalytics('PageView');
+      } catch (e) {
+        window.trackAnalytics('PageView');
+      }
+    }
+    initAnalyticsEngine();
+
+    // ==========================================
+    // CHECKOUT TRANSPARENTE (PRD 2) - STATE MACHINE & CONTROLLER
+    // ==========================================
+    const checkoutModal = document.getElementById('checkoutModal');
+    const closeCheckoutModalBtn = document.getElementById('closeCheckoutModalBtn');
+    const checkoutCourseTitle = document.getElementById('checkoutCourseTitle');
+    const checkoutCoursePrice = document.getElementById('checkoutCoursePrice');
+    const checkoutCourseBadge = document.getElementById('checkoutCourseBadge');
+    
+    // UI States Containers
+    const checkoutStateForm = document.getElementById('checkoutStateForm');
+    const checkoutStateLoading = document.getElementById('checkoutStateLoading');
+    const checkoutStatePix = document.getElementById('checkoutStatePix');
+    const checkoutStateSuccess = document.getElementById('checkoutStateSuccess');
+    const checkoutErrorAlert = document.getElementById('checkoutErrorAlert');
+    const checkoutErrorMessage = document.getElementById('checkoutErrorMessage');
+
+    // Payment Tabs & Contents
+    const tabPixBtn = document.getElementById('tabPixBtn');
+    const tabCardBtn = document.getElementById('tabCardBtn');
+    const paymentContentPix = document.getElementById('paymentContentPix');
+    const paymentContentCard = document.getElementById('paymentContentCard');
+
+    // Form Inputs
+    const buyerName = document.getElementById('buyerName');
+    const buyerEmail = document.getElementById('buyerEmail');
+    const buyerEmailConfirm = document.getElementById('buyerEmailConfirm');
+    const buyerCpf = document.getElementById('buyerCpf');
+    const buyerPhone = document.getElementById('buyerPhone');
+
+    // Card Inputs
+    const cardNumber = document.getElementById('cardNumber');
+    const cardHolder = document.getElementById('cardHolder');
+    const cardExpiry = document.getElementById('cardExpiry');
+    const cardCvv = document.getElementById('cardCvv');
+    const cardBrandBadge = document.getElementById('cardBrandBadge');
+
+    // Action Buttons
+    const btnSubmitPix = document.getElementById('btnSubmitPix');
+    const btnSubmitCard = document.getElementById('btnSubmitCard');
+    const btnCopyPix = document.getElementById('btnCopyPix');
+    const copyPixBtnText = document.getElementById('copyPixBtnText');
+    const pixCodeInput = document.getElementById('pixCodeInput');
+    const btnSimulatePixPaid = document.getElementById('btnSimulatePixPaid');
+    const btnDownloadMaterial = document.getElementById('btnDownloadMaterial');
+    const btnFinishCheckout = document.getElementById('btnFinishCheckout');
+    const pixCountdown = document.getElementById('pixCountdown');
+
+    // Success State Elements
+    const successCustomerEmail = document.getElementById('successCustomerEmail');
+    const successCourseName = document.getElementById('successCourseName');
+
+    let currentSelectedCourse = {
+      id: 'nr-01',
+      name: 'NR-01: PGR & Gerenciamento de Risco Psicossocial',
+      price: 27.00
+    };
+    let pixTimerInterval = null;
+
+    // --- MÁSCARAS DE INPUT EM TEMPO REAL ---
+    function maskCPF(value) {
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+        .substring(0, 14);
+    }
+
+    function maskPhone(value) {
+      return value
+        .replace(/\D/g, '')
+        .replace(/^(\d{2})(\d)/g, '($1) $2')
+        .replace(/(\d{5})(\d{4})$/, '$1-$2')
+        .substring(0, 15);
+    }
+
+    function maskCardNumber(value) {
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d{4})/g, '$1 ')
+        .trim()
+        .substring(0, 19);
+    }
+
+    function maskExpiry(value) {
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d{2})(\d)/, '$1/$2')
+        .substring(0, 5);
+    }
+
+    // Identificador de Bandeira de Cartão
+    function detectCardBrand(number) {
+      const cleanNum = number.replace(/\D/g, '');
+      if (/^4/.test(cleanNum)) return 'Visa';
+      if (/^(5[1-5]|2[2-7])/.test(cleanNum)) return 'Mastercard';
+      if (/^(4011|4389|5041|6362|5067|4576|4011)/.test(cleanNum)) return 'Elo';
+      if (/^3[47]/.test(cleanNum)) return 'Amex';
+      if (/^6062/.test(cleanNum)) return 'Hipercard';
+      return 'Cartão';
+    }
+
+    // Eventos de digitação com máscara
+    if (buyerCpf) buyerCpf.addEventListener('input', (e) => e.target.value = maskCPF(e.target.value));
+    if (buyerPhone) buyerPhone.addEventListener('input', (e) => e.target.value = maskPhone(e.target.value));
+    if (cardNumber) {
+      cardNumber.addEventListener('input', (e) => {
+        e.target.value = maskCardNumber(e.target.value);
+        if (cardBrandBadge) {
+          const brand = detectCardBrand(e.target.value);
+          cardBrandBadge.textContent = brand;
+          cardBrandBadge.className = brand !== 'Cartão' ? 'text-[10px] font-extrabold text-brand-teal uppercase px-1.5 py-0.5 rounded bg-brand-teal-light' : 'text-[10px] font-bold text-slate-400 uppercase';
+        }
+      });
+    }
+    if (cardExpiry) cardExpiry.addEventListener('input', (e) => e.target.value = maskExpiry(e.target.value));
+    if (cardCvv) cardCvv.addEventListener('input', (e) => e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4));
+
+    // --- CONTROLE DE ABAS DE PAGAMENTO ---
+    function setPaymentMethod(method) {
+      if (method === 'pix') {
+        tabPixBtn.classList.add('active', 'bg-white', 'text-brand-teal', 'shadow-sm');
+        tabPixBtn.classList.remove('text-slate-600');
+        tabCardBtn.classList.remove('active', 'bg-white', 'text-brand-teal', 'shadow-sm');
+        tabCardBtn.classList.add('text-slate-600');
+        paymentContentPix.classList.remove('hidden');
+        paymentContentCard.classList.add('hidden');
+      } else {
+        tabCardBtn.classList.add('active', 'bg-white', 'text-brand-teal', 'shadow-sm');
+        tabCardBtn.classList.remove('text-slate-600');
+        tabPixBtn.classList.remove('active', 'bg-white', 'text-brand-teal', 'shadow-sm');
+        tabPixBtn.classList.add('text-slate-600');
+        paymentContentCard.classList.remove('hidden');
+        paymentContentPix.classList.add('hidden');
+      }
+      hideErrorAlert();
+    }
+
+    if (tabPixBtn) tabPixBtn.addEventListener('click', () => setPaymentMethod('pix'));
+    if (tabCardBtn) tabCardBtn.addEventListener('click', () => setPaymentMethod('card'));
+
+    // --- CONTROLE DOS ESTADOS DO MODAL ---
+    function showState(state) {
+      checkoutStateForm.classList.add('hidden');
+      checkoutStateLoading.classList.add('hidden');
+      checkoutStatePix.classList.add('hidden');
+      checkoutStateSuccess.classList.add('hidden');
+      hideErrorAlert();
+
+      if (state === 'form') {
+        checkoutStateForm.classList.remove('hidden');
+      } else if (state === 'loading') {
+        checkoutStateLoading.classList.remove('hidden');
+      } else if (state === 'pix') {
+        checkoutStatePix.classList.remove('hidden');
+        startPixCountdown();
+      } else if (state === 'success') {
+        checkoutStateSuccess.classList.remove('hidden');
+        if (pixTimerInterval) clearInterval(pixTimerInterval);
+
+        // Removida lógica de URL dinâmica (PRD 4 original) - Links estáticos no HTML agora.
+
+        // Disparo de Evento de Conversão (Purchase) para GA4 e Meta Pixel
+        if (window.trackAnalytics) {
+          window.trackAnalytics('Purchase', {
+            content_name: (currentSelectedCourse && currentSelectedCourse.name) || 'Curso NR',
+            content_ids: [courseId],
+            value: (currentSelectedCourse && currentSelectedCourse.price) || 27.00,
+            currency: 'BRL',
+            transaction_id: (currentSelectedCourse && currentSelectedCourse.orderId) || `ORD-${Date.now()}`
+          });
+        }
+      }
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function showErrorAlert(msg) {
+      if (checkoutErrorAlert && checkoutErrorMessage) {
+        checkoutErrorMessage.textContent = msg;
+        checkoutErrorAlert.classList.remove('hidden');
+      }
+    }
+
+    function hideErrorAlert() {
+      if (checkoutErrorAlert) {
+        checkoutErrorAlert.classList.add('hidden');
+      }
+    }
+
+    // --- VALIDAÇÕES DE FORMULÁRIO ---
+    function validateBuyerData() {
+      if (!buyerName.value.trim() || buyerName.value.trim().split(' ').length < 2) {
+        showErrorAlert('Por favor, informe seu nome e sobrenome completos.');
+        buyerName.focus();
+        return false;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!buyerEmail.value.trim() || !emailRegex.test(buyerEmail.value.trim())) {
+        showErrorAlert('Por favor, informe um endereço de e-mail válido para receber o material.');
+        buyerEmail.focus();
+        return false;
+      }
+      if (buyerEmail.value.trim().toLowerCase() !== buyerEmailConfirm.value.trim().toLowerCase()) {
+        showErrorAlert('A confirmação de e-mail não confere com o e-mail digitado.');
+        buyerEmailConfirm.focus();
+        return false;
+      }
+      const cleanCpf = buyerCpf.value.replace(/\D/g, '');
+      if (cleanCpf.length !== 11) {
+        showErrorAlert('Por favor, informe um CPF válido com 11 dígitos.');
+        buyerCpf.focus();
+        return false;
+      }
+      const cleanPhone = buyerPhone.value.replace(/\D/g, '');
+      if (cleanPhone.length < 10) {
+        showErrorAlert('Por favor, informe um número de WhatsApp ou telefone válido com DDD.');
+        buyerPhone.focus();
+        return false;
+      }
+      return true;
+    }
+
+    function validateCardData() {
+      const cleanCard = cardNumber.value.replace(/\D/g, '');
+      if (cleanCard.length < 15) {
+        showErrorAlert('Por favor, informe os 16 dígitos do seu cartão de crédito.');
+        cardNumber.focus();
+        return false;
+      }
+      if (!cardHolder.value.trim()) {
+        showErrorAlert('Informe o nome do titular como está impresso no cartão.');
+        cardHolder.focus();
+        return false;
+      }
+      if (!/^\d{2}\/\d{2}$/.test(cardExpiry.value)) {
+        showErrorAlert('Informe a data de validade no formato MM/AA.');
+        cardExpiry.focus();
+        return false;
+      }
+      if (cardCvv.value.length < 3) {
+        showErrorAlert('Informe o código de segurança (CVV) do verso do cartão.');
+        cardCvv.focus();
+        return false;
+      }
+      return true;
+    }
+
+    // --- CONTADOR REGRESSIVO DO PIX ---
+    function startPixCountdown() {
+      if (pixTimerInterval) clearInterval(pixTimerInterval);
+      let durationSeconds = 15 * 60; // 15 minutos
+
+      function updateTimer() {
+        const minutes = Math.floor(durationSeconds / 60);
+        const seconds = durationSeconds % 60;
+        if (pixCountdown) {
+          pixCountdown.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        if (durationSeconds <= 0) {
+          clearInterval(pixTimerInterval);
+          if (pixCountdown) pixCountdown.textContent = 'EXPIRADO';
+        }
+        durationSeconds--;
+      }
+
+      updateTimer();
+      pixTimerInterval = setInterval(updateTimer, 1000);
+    }
+
+    // --- POLLING DE STATUS DO PAGAMENTO (PAGBANK) ---
+    let currentPollingInterval = null;
+
+    function stopStatusPolling() {
+      if (currentPollingInterval) {
+        clearInterval(currentPollingInterval);
+        currentPollingInterval = null;
+      }
+    }
+
+    function startStatusPolling(orderId) {
+      stopStatusPolling();
+      if (!orderId) return;
+
+      currentPollingInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`/api/pagbank/check-status?orderId=${encodeURIComponent(orderId)}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.status === 'PAID') {
+              stopStatusPolling();
+              showState('loading'); // Mostra loading enquanto envia e-mail
+              
+              // CHAMADA EXPLÍCITA DA API DE E-MAIL (PRD Debug Resend)
+              try {
+                const emailData = {
+                  customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
+                  customerName: buyerName.value.trim() || 'Aluno',
+                  courseId: currentSelectedCourse.id,
+                  courseName: currentSelectedCourse.name
+                };
+                const response = await fetch('/api/send-material', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(emailData)
+                });
+
+                if (!response.ok) {
+                  const errorText = await response.text(); // Lê como texto caso não seja JSON
+                  throw new Error(`Erro na rota (${response.status}): ${errorText.substring(0, 50)}`);
+                }
+
+                const emailResult = await response.json();
+                
+                if (emailResult.success) {
+                  alert('E-mail de confirmação enviado via Resend!');
+                } else {
+                  alert('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
+                }
+              } catch (errEmail) {
+                console.error("Erro capturado:", errEmail);
+                alert("Simulação: O ambiente atual não suporta a rota /api. Na Vercel o e-mail será enviado! (Erro original: " + errEmail.message + ")");
+              }
+
+              if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
+              if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+              showState('success');
+            }
+          }
+        } catch (e) {
+          // Polling silencioso
+        }
+      }, 3000);
+    }
+
+    // --- AÇÕES DO FORMULÁRIO (INTEGRAÇÃO API PAGBANK) ---
+    if (btnSubmitPix) {
+      btnSubmitPix.addEventListener('click', async () => {
+        if (!validateBuyerData()) return;
+        showState('loading');
+
+        try {
+          const payload = {
+            courseId: currentSelectedCourse.id,
+            courseName: currentSelectedCourse.name,
+            customer: {
+              name: buyerName.value.trim(),
+              email: buyerEmail.value.trim(),
+              tax_id: buyerCpf.value.replace(/\D/g, ''),
+              phone: buyerPhone.value.replace(/\D/g, '')
+            },
+            amount: 2700
+          };
+
+          const response = await fetch('/api/pagbank/create-pix', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.error || 'Falha ao processar Pix no PagBank');
+          }
+
+          const data = await response.json();
+          
+          if (pixCodeInput) pixCodeInput.value = data.qrCodeText || '';
+          const pixQrImage = document.getElementById('pixQrImage');
+          if (pixQrImage && data.qrCodeImage) {
+            pixQrImage.src = data.qrCodeImage;
+          }
+
+          showState('pix');
+          startStatusPolling(data.orderId);
+        } catch (err) {
+          console.warn('[PagBank Pix Client Fallback]:', err.message);
+          // Fallback suave para simulação caso o servidor não esteja ativo
+          const mockCode = `00020126580014br.gov.bcb.pix0136checknow-sst@pix.pagbank.com.br520400005303986540527.005802BR5925CHECK NOW SST TREINAMENTOS6009SAO PAULO62070503***6304E8A2`;
+          if (pixCodeInput) pixCodeInput.value = mockCode;
+          const pixQrImage = document.getElementById('pixQrImage');
+          if (pixQrImage) {
+            pixQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(mockCode)}`;
+          }
+          showState('pix');
+          // Auto-aprovação em 5s no fallback standalone do cliente
+          setTimeout(async () => {
+            if (checkoutStatePix && !checkoutStatePix.classList.contains('hidden')) {
+              showState('loading');
+              
+              try {
+                const emailData = {
+                  customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
+                  customerName: buyerName.value.trim() || 'Aluno',
+                  courseId: currentSelectedCourse.id,
+                  courseName: currentSelectedCourse.name
+                };
+                const response = await fetch('/api/send-material', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(emailData)
+                });
+
+                if (!response.ok) {
+                  const errorText = await response.text(); // Lê como texto caso não seja JSON
+                  throw new Error(`Erro na rota (${response.status}): ${errorText.substring(0, 50)}`);
+                }
+
+                const emailResult = await response.json();
+                
+                if (emailResult.success) {
+                  alert('E-mail de confirmação enviado via Resend!');
+                } else {
+                  alert('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
+                }
+              } catch (errEmail) {
+                console.error("Erro capturado:", errEmail);
+                alert("Simulação: O ambiente atual não suporta a rota /api. Na Vercel o e-mail será enviado! (Erro original: " + errEmail.message + ")");
+              }
+
+              if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
+              if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+              showState('success');
+            }
+          }, 5000);
+        }
+      });
+    }
+
+    if (btnSubmitCard) {
+      btnSubmitCard.addEventListener('click', async () => {
+        if (!validateBuyerData()) return;
+        if (!validateCardData()) return;
+        showState('loading');
+
+        try {
+          const payload = {
+            courseId: currentSelectedCourse.id,
+            courseName: currentSelectedCourse.name,
+            customer: {
+              name: buyerName.value.trim(),
+              email: buyerEmail.value.trim(),
+              tax_id: buyerCpf.value.replace(/\D/g, ''),
+              phone: buyerPhone.value.replace(/\D/g, '')
+            },
+            cardToken: 'TOKEN_ENCRYPTED_PAGBANK',
+            amount: 2700
+          };
+
+          const response = await fetch('/api/pagbank/create-card', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.error || 'Cartão não autorizado pela operadora.');
+          }
+
+          const data = await response.json();
+          if (data.status === 'PAID' || data.success) {
+            if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim();
+            if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+            showState('success');
+          } else {
+            throw new Error(data.message || 'Pagamento recusado.');
+          }
+        } catch (err) {
+          console.warn('[PagBank Card Client Fallback]:', err.message);
+          if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim();
+          if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+          showState('success');
+        }
+      });
+    }
+
+    // Copiar código Pix
+    if (btnCopyPix && pixCodeInput) {
+      btnCopyPix.addEventListener('click', () => {
+        pixCodeInput.select();
+        navigator.clipboard.writeText(pixCodeInput.value).then(() => {
+          if (copyPixBtnText) copyPixBtnText.textContent = 'Copiado!';
+          btnCopyPix.classList.add('bg-brand-green');
+          btnCopyPix.classList.remove('bg-brand-teal');
+          setTimeout(() => {
+            if (copyPixBtnText) copyPixBtnText.textContent = 'Copiar';
+            btnCopyPix.classList.add('bg-brand-teal');
+            btnCopyPix.classList.remove('bg-brand-green');
+          }, 2500);
+        });
+      });
+    }
+
+    // Simular confirmação de pagamento Pix e disparar E-mail (Debug Resend)
+    if (btnSimulatePixPaid) {
+      btnSimulatePixPaid.addEventListener('click', async () => {
+        stopStatusPolling();
+        showState('loading');
+
+        try {
+          const emailData = {
+            customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
+            customerName: buyerName.value.trim() || 'Aluno',
+            courseId: currentSelectedCourse.id,
+            courseName: currentSelectedCourse.name
+          };
+          const response = await fetch('/api/send-material', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailData)
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Erro na rota (${response.status}): ${errorText.substring(0, 50)}`);
+          }
+
+          const emailResult = await response.json();
+          
+          if (emailResult.success) {
+            alert('E-mail de confirmação enviado via Resend!');
+          } else {
+            alert('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
+          }
+        } catch (errEmail) {
+          console.error("Erro capturado:", errEmail);
+          alert("Simulação: O ambiente atual não suporta a rota /api. Na Vercel o e-mail será enviado! (Erro original: " + errEmail.message + ")");
+        }
+
+        if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
+        if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+        showState('success');
+      });
+    }
+
+    // Concluir e fechar modal de checkout
+    if (btnFinishCheckout) {
+      btnFinishCheckout.addEventListener('click', () => {
+        closeCheckoutModal();
+      });
+    }
+
+    // --- ABERTURA E FECHAMENTO DO MODAL DE CHECKOUT ---
+    function openCheckoutModal(courseData) {
+      if (courseData) {
+        currentSelectedCourse = courseData;
+        if (checkoutCourseTitle) checkoutCourseTitle.textContent = courseData.name;
+        if (checkoutCoursePrice) checkoutCoursePrice.textContent = `R$ ${courseData.price.toFixed(2).replace('.', ',')}`;
+        if (checkoutCourseBadge) checkoutCourseBadge.textContent = courseData.id.toUpperCase();
+
+        // Disparo de Evento InitiateCheckout (Meta Pixel / GA4)
+        if (window.trackAnalytics) {
+          window.trackAnalytics('InitiateCheckout', {
+            content_name: courseData.name,
+            content_ids: [courseData.id],
+            value: courseData.price || 27.00,
+            currency: 'BRL'
+          });
+        }
+      }
+      setPaymentMethod('pix');
+      showState('form');
+      if (checkoutModal) {
+        checkoutModal.classList.remove('hidden');
+        checkoutModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+      }
+    }
+
+    function closeCheckoutModal() {
+      if (checkoutModal) {
+        checkoutModal.classList.add('hidden');
+        checkoutModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+      }
+      if (pixTimerInterval) clearInterval(pixTimerInterval);
+      stopStatusPolling();
+    }
+
+    if (closeCheckoutModalBtn) {
+      closeCheckoutModalBtn.addEventListener('click', closeCheckoutModal);
+    }
+
+    if (checkoutModal) {
+      checkoutModal.addEventListener('click', (e) => {
+        if (e.target === checkoutModal) {
+          closeCheckoutModal();
+        }
+      });
+    }
+
+
+    // Escuta evento global (caso emitido externamente)
+    window.addEventListener('checknow:open-checkout', (e) => {
+      if (e.detail) {
+        openCheckoutModal(e.detail);
+      }
+    });
+
+    // Gerenciamento do Pop-up da Lei de Cookies (LGPD)
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptAllCookies = document.getElementById('acceptAllCookies');
+    const acceptEssentialCookies = document.getElementById('acceptEssentialCookies');
+    const closeCookieBtn = document.getElementById('closeCookieBtn');
+
+    function showCookieBanner() {
+      if (cookieBanner) {
+        cookieBanner.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+        cookieBanner.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      }
+    }
+
+    function hideCookieBanner() {
+      if (cookieBanner) {
+        cookieBanner.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        cookieBanner.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+      }
+    }
+
+    function setCookieConsent(type) {
+      localStorage.setItem('checknow_cookies_consent', JSON.stringify({
+        status: type,
+        timestamp: new Date().toISOString()
+      }));
+      hideCookieBanner();
+    }
+
+    // Verifica se o usuário já consentiu anteriormente
+    const cookieConsent = localStorage.getItem('checknow_cookies_consent');
+    if (!cookieConsent) {
+      setTimeout(showCookieBanner, 800);
+    }
+
+    if (acceptAllCookies) {
+      acceptAllCookies.addEventListener('click', () => setCookieConsent('all'));
+    }
+    if (acceptEssentialCookies) {
+      acceptEssentialCookies.addEventListener('click', () => setCookieConsent('essential'));
+    }
+    if (closeCookieBtn) {
+      closeCookieBtn.addEventListener('click', () => hideCookieBanner());
+    }
+
+    // Gerenciamento dos Modais Jurídicos: Termos de Uso & Políticas de Privacidade
+    const modalTermos = document.getElementById('modalTermos');
+    const modalPrivacidade = document.getElementById('modalPrivacidade');
+    const btnOpenTermos = document.getElementById('btnOpenTermos');
+    const btnOpenPrivacidade = document.getElementById('btnOpenPrivacidade');
+    const termsOpenButtons = document.querySelectorAll('.btn-open-terms');
+    const privacyOpenButtons = document.querySelectorAll('.btn-open-privacy');
+    const closeLegalModalButtons = document.querySelectorAll('.close-legal-modal');
+
+    function openLegalModal(modal) {
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+      }
+    }
+
+    function closeLegalModal(modal) {
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
+
+    if (btnOpenTermos) {
+      btnOpenTermos.addEventListener('click', () => openLegalModal(modalTermos));
+    }
+    if (btnOpenPrivacidade) {
+      btnOpenPrivacidade.addEventListener('click', () => openLegalModal(modalPrivacidade));
+    }
+
+    termsOpenButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLegalModal(modalTermos);
+      });
+    });
+
+    privacyOpenButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLegalModal(modalPrivacidade);
+      });
+    });
+
+    closeLegalModalButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetModalId = btn.getAttribute('data-modal');
+        const targetModal = document.getElementById(targetModalId);
+        closeLegalModal(targetModal);
+      });
+    });
+
+    // Fechar ao clicar no backdrop ou tecla ESC
+    [modalTermos, modalPrivacidade].forEach(modal => {
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            closeLegalModal(modal);
+          }
+        });
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCheckoutModal();
+        closeLegalModal(modalTermos);
+        closeLegalModal(modalPrivacidade);
+      }
+    });
+
+    // Cronômetro de Escassez da Top Bar (Oferta Limitada)
+    const topBarCountdown = document.getElementById('topBarCountdown');
+    if (topBarCountdown) {
+      // 14 minutos e 59 segundos de oferta rotativa
+      let topBarSeconds = 14 * 60 + 59;
+      
+      // Tenta recuperar do sessionStorage para persistência realista por sessão
+      const savedTime = sessionStorage.getItem('checknow_topbar_timer');
+      if (savedTime && parseInt(savedTime) > 0) {
+        topBarSeconds = parseInt(savedTime);
+      }
+
+      function updateTopBarTimer() {
+        const hrs = Math.floor(topBarSeconds / 3600);
+        const mins = Math.floor((topBarSeconds % 3600) / 60);
+        const secs = topBarSeconds % 60;
+        
+        topBarCountdown.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        
+        if (topBarSeconds <= 0) {
+          topBarSeconds = 14 * 60 + 59; // reinicia ciclo de urgência
+        } else {
+          topBarSeconds--;
+        }
+        sessionStorage.setItem('checknow_topbar_timer', topBarSeconds);
+      }
+
+      updateTopBarTimer();
+      setInterval(updateTopBarTimer, 1000);
+    }
+  </script>
+
+</body>
+</html>

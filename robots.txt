@@ -1,0 +1,5 @@
+﻿User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://cursoschecknow.com.br/sitemap.xml
