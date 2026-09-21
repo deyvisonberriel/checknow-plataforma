@@ -1983,7 +1983,7 @@
               tax_id: buyerCpf.value.replace(/\D/g, ''),
               phone: buyerPhone.value.replace(/\D/g, '')
             },
-            amount: 2700
+            amount: Math.round(currentSelectedCourse.price * 100)
           };
 
           const response = await fetch('/api/pagbank/create-pix', {
@@ -2078,7 +2078,7 @@
               phone: buyerPhone.value.replace(/\D/g, '')
             },
             cardToken: 'TOKEN_ENCRYPTED_PAGBANK',
-            amount: 2700
+            amount: Math.round(currentSelectedCourse.price * 100)
           };
 
           const response = await fetch('/api/pagbank/create-card', {
