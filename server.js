@@ -98,17 +98,33 @@ app.post('/api/pagbank/create-card', async (req, res) => {
       installments: 1
     });
 
-    // Se aprovado, dispara o envio de e-mail automaticamente
-    if (order.status === 'PAID') {
-      emailService.sendCourseMaterial({
-        customerEmail: customer.email,
-        customerName: customer.name,
-        courseId: courseId || 'nr-35',
-        courseName: courseName || 'Material Didﾃ｡tico NR'
-      }).catch(err => console.error('[Auto Email Error]:', err));
-    }
+    
+      // Se aprovado, busca URLs reais e dispara o envio de e-mail automaticamente
+      if (order.status === 'PAID') {
+        let materialUrl = null;
+        let certificateUrl = null;
+        const cId = courseId || 'nr-35';
+        try {
+          const { data } = await supabase.from('courses').select('material_url, certificate_url').eq('id', cId).single();
+          if (data) {
+            materialUrl = data.material_url;
+            certificateUrl = data.certificate_url;
+            order.materialUrl = materialUrl;
+            order.certificateUrl = certificateUrl;
+          }
+        } catch(e) { console.error('Supabase Error (Create Card)', e); }
 
-    res.json(order);
+        emailService.sendCourseMaterial({
+          customerEmail: customer.email,
+          customerName: customer.name,
+          courseId: cId,
+          courseName: courseName || 'Material Didático Check Now',
+          materialUrl,
+          certificateUrl
+        }).catch(err => console.error('[Auto Email Error]:', err));
+      }
+
+      res.json(order);
   } catch (error) {
     console.error('[API Create Card Error]:', error);
     res.status(500).json({
@@ -132,21 +148,42 @@ app.get('/api/pagbank/check-status', async (req, res) => {
 
     const result = await pagbank.getOrderStatus(orderId);
     
-    // Se mudou para PAID, dispara entrega automﾃ｡tica por e-mail caso ainda nﾃ｣o tenha sido disparada
-    if (result.status === 'PAID' && result.isMock) {
-      const mock = pagbank.memoryOrders.get(orderId);
-      if (mock && !mock.emailDispatched) {
-        mock.emailDispatched = true;
-        emailService.sendCourseMaterial({
-          customerEmail: mock.customer.email,
-          customerName: mock.customer.name,
-          courseId: mock.courseId,
-          courseName: mock.courseName
-        }).catch(err => console.error('[Auto Mock Email Error]:', err));
-      }
-    }
+    
+      // Se mudou para PAID, busca URLs reais e dispara entrega automática por e-mail caso ainda não tenha sido disparada
+      if (result.status === 'PAID') {
+        const cId = result.isMock 
+          ? (pagbank.memoryOrders.get(orderId)?.courseId || 'nr-35')
+          : (result.order?.items?.[0]?.reference_id || 'nr-35');
+        
+        let materialUrl = null;
+        let certificateUrl = null;
+        try {
+          const { data } = await supabase.from('courses').select('material_url, certificate_url').eq('id', cId).single();
+          if (data) {
+            materialUrl = data.material_url;
+            certificateUrl = data.certificate_url;
+            result.materialUrl = materialUrl;
+            result.certificateUrl = certificateUrl;
+          }
+        } catch(e) { console.error('Supabase Error (Check Status)', e); }
 
-    res.json(result);
+        if (result.isMock) {
+          const mock = pagbank.memoryOrders.get(orderId);
+          if (mock && !mock.emailDispatched) {
+            mock.emailDispatched = true;
+            emailService.sendCourseMaterial({
+              customerEmail: mock.customer.email,
+              customerName: mock.customer.name,
+              courseId: cId,
+              courseName: mock.courseName,
+              materialUrl,
+              certificateUrl
+            }).catch(err => console.error('[Auto Mock Email Error]:', err));
+          }
+        }
+      }
+
+      res.json(result);
   } catch (error) {
     res.status(500).json({
       success: false,

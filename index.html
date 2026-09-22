@@ -1958,6 +1958,25 @@
 
               if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
               if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+                            if (typeof result !== 'undefined' && result) {
+                if (result.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = result.materialUrl;
+                }
+                if (result.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = result.certificateUrl;
+                }
+              } else if (typeof data !== 'undefined' && data) {
+                if (data.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = data.materialUrl;
+                }
+                if (data.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = data.certificateUrl;
+                }
+              }
               showState('success');
             }
           }
@@ -2054,6 +2073,25 @@
 
               if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
               if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
+                            if (typeof result !== 'undefined' && result) {
+                if (result.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = result.materialUrl;
+                }
+                if (result.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = result.certificateUrl;
+                }
+              } else if (typeof data !== 'undefined' && data) {
+                if (data.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = data.materialUrl;
+                }
+                if (data.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = data.certificateUrl;
+                }
+              }
               showState('success');
             }
           }, 5000);
@@ -2096,7 +2134,26 @@
           if (data.status === 'PAID' || data.success) {
             if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim();
             if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
-            showState('success');
+                          if (typeof result !== 'undefined' && result) {
+                if (result.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = result.materialUrl;
+                }
+                if (result.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = result.certificateUrl;
+                }
+              } else if (typeof data !== 'undefined' && data) {
+                if (data.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = data.materialUrl;
+                }
+                if (data.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = data.certificateUrl;
+                }
+              }
+              showState('success');
           } else {
             throw new Error(data.message || 'Pagamento recusado.');
           }
@@ -2104,7 +2161,26 @@
           console.warn('[PagBank Card Client Fallback]:', err.message);
           if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim();
           if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
-          showState('success');
+                        if (typeof result !== 'undefined' && result) {
+                if (result.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = result.materialUrl;
+                }
+                if (result.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = result.certificateUrl;
+                }
+              } else if (typeof data !== 'undefined' && data) {
+                if (data.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = data.materialUrl;
+                }
+                if (data.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = data.certificateUrl;
+                }
+              }
+              showState('success');
         }
       });
     }
@@ -2164,7 +2240,26 @@
 
         if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
         if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
-        showState('success');
+                      if (typeof result !== 'undefined' && result) {
+                if (result.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = result.materialUrl;
+                }
+                if (result.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = result.certificateUrl;
+                }
+              } else if (typeof data !== 'undefined' && data) {
+                if (data.materialUrl) {
+                  const btnApostila = document.getElementById('btnDownloadApostila');
+                  if (btnApostila) btnApostila.href = data.materialUrl;
+                }
+                if (data.certificateUrl) {
+                  const btnCert = document.getElementById('btnDownloadCertificado');
+                  if (btnCert) btnCert.href = data.certificateUrl;
+                }
+              }
+              showState('success');
       });
     }
 
