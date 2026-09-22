@@ -251,7 +251,7 @@ app.post('/api/send-material', async (req, res) => {
       }
 
       if (!material_url || !certificate_url) {
-        console.log('[DEBUG Backend] URLs recebidas nulas ou ausentes no req.body. Dados:', req.body);
+        console.log('[DEBUG Backend] ERRO DE URL NO PAYLOAD! req.body.material_url:', req.body.material_url, 'req.body.certificate_url:', req.body.certificate_url);
       }
 
       let materialUrl = material_url;
