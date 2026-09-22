@@ -2275,7 +2275,17 @@
       if (courseData) {
         currentSelectedCourse = courseData;
         if (checkoutCourseTitle) checkoutCourseTitle.textContent = courseData.name;
-        if (checkoutCoursePrice) checkoutCoursePrice.textContent = `R$ ${courseData.price.toFixed(2).replace('.', ',')}`;
+        const formattedPrice = `R$ ${courseData.price.toFixed(2).replace('.', ',')}`;
+          if (checkoutCoursePrice) checkoutCoursePrice.textContent = formattedPrice;
+          
+          if (btnSubmitPix) {
+            const spanPix = btnSubmitPix.querySelector('span');
+            if (spanPix) spanPix.textContent = `GERAR PIX - ${formattedPrice}`;
+          }
+          if (btnSubmitCard) {
+            const spanCard = btnSubmitCard.querySelector('span');
+            if (spanCard) spanCard.textContent = `PAGAR ${formattedPrice} NO CARTÃO (À VISTA)`;
+          }
         if (checkoutCourseBadge) checkoutCourseBadge.textContent = courseData.id.toUpperCase();
 
         // Disparo de Evento InitiateCheckout (Meta Pixel / GA4)
