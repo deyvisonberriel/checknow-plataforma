@@ -1947,13 +1947,13 @@
                 const emailResult = await response.json();
                 
                 if (emailResult.success) {
-                  alert('E-mail de confirmação enviado via Resend!');
+                  console.log('E-mail enviado via Resend (silencioso)');
                 } else {
-                  alert('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
+                  console.error('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
                 }
               } catch (errEmail) {
                 console.error("Erro capturado:", errEmail);
-                alert("Simulação: O ambiente atual não suporta a rota /api. Na Vercel o e-mail será enviado! (Erro original: " + errEmail.message + ")");
+                console.warn('Simulação/Dev: ' + errEmail.message);
               }
 
               if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
@@ -2062,13 +2062,13 @@
                 const emailResult = await response.json();
                 
                 if (emailResult.success) {
-                  alert('E-mail de confirmação enviado via Resend!');
+                  console.log('E-mail enviado via Resend (silencioso)');
                 } else {
-                  alert('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
+                  console.error('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
                 }
               } catch (errEmail) {
                 console.error("Erro capturado:", errEmail);
-                alert("Simulação: O ambiente atual não suporta a rota /api. Na Vercel o e-mail será enviado! (Erro original: " + errEmail.message + ")");
+                console.warn('Simulação/Dev: ' + errEmail.message);
               }
 
               if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
@@ -2229,13 +2229,13 @@
           const emailResult = await response.json();
           
           if (emailResult.success) {
-            alert('E-mail de confirmação enviado via Resend!');
+            console.log('E-mail enviado via Resend (silencioso)');
           } else {
-            alert('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
+            console.error('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
           }
         } catch (errEmail) {
           console.error("Erro capturado:", errEmail);
-          alert("Simulação: O ambiente atual não suporta a rota /api. Na Vercel o e-mail será enviado! (Erro original: " + errEmail.message + ")");
+          console.warn('Simulação/Dev: ' + errEmail.message);
         }
 
         if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
