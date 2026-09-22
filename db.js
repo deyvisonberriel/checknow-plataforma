@@ -22,7 +22,7 @@ async function getCourses() {
   // Selecionando explicitamente as colunas exatas (com aspas duplas para o camelCase não quebrar no PostgREST)
   const { data, error } = await window.supabaseClient
     .from('courses')
-    .select('id, tag, "categoryId", title, description, "currentPrice", "oldPrice", "isSpecialOffer", status');
+    .select('id, tag, "categoryId", title, description, "currentPrice", "oldPrice", "isSpecialOffer", status, material_url, certificate_url');
     
   if (error) {
     console.error("Erro Supabase (Cursos):", error);

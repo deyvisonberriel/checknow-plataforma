@@ -243,24 +243,21 @@ app.post('/api/pagbank/webhook', async (req, res) => {
 
 // 8. Rota: Disparo de E-mail via Resend (POST /api/send-material)
 app.post('/api/send-material', async (req, res) => {
-  try {
-    const { customerEmail, customerName, courseId, courseName } = req.body;
-
-    if (!customerEmail) {
-      return res.status(400).json({ success: false, error: 'customerEmail ﾃｩ obrigatﾃｳrio.' });
-    }
-
-    let materialUrl = null;
-    let certificateUrl = null;
     try {
-      const { data } = await supabase.from('courses').select('material_url, certificate_url').eq('id', courseId).single();
-      if (data) {
-        materialUrl = data.material_url;
-        certificateUrl = data.certificate_url;
+      const { customerEmail, customerName, courseId, courseName, material_url, certificate_url } = req.body;
+  
+      if (!customerEmail) {
+        return res.status(400).json({ success: false, error: 'customerEmail é obrigatório.' });
       }
-    } catch(e) { console.error('Supabase Error (API)', e); }
 
-    if (!process.env.RESEND_API_KEY) {
+      if (!material_url || !certificate_url) {
+        console.log('[DEBUG Backend] URLs recebidas nulas ou ausentes no req.body. Dados:', req.body);
+      }
+
+      let materialUrl = material_url;
+      let certificateUrl = certificate_url;
+
+      if (!process.env.RESEND_API_KEY) {
       console.log(`[Resend Mock] Chave nao configurada para: ${customerEmail}`);
       return res.json({ success: true, isMock: true, message: 'Mock Email Enviado' });
     }
