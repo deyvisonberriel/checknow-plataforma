@@ -24,10 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 const downloadsPath = path.join(__dirname, 'public', 'downloads');
 app.use('/downloads', express.static(downloadsPath));
 
-// 2. Servir arquivos estáticos da landing page
+// 2. Servir arquivos estﾃ｡ticos da landing page
 app.use(express.static(path.join(__dirname)));
 
-// 3. Rota de Configurações Públicas (Frontend)
+// 3. Rota de Configuraﾃｧﾃｵes Pﾃｺblicas (Frontend)
 app.get('/api/pagbank/config', (req, res) => {
   res.json({
     success: true,
@@ -37,7 +37,7 @@ app.get('/api/pagbank/config', (req, res) => {
   });
 });
 
-// 3.1 Rota de Configurações de Analytics e Rastreamento
+// 3.1 Rota de Configuraﾃｧﾃｵes de Analytics e Rastreamento
 app.get('/api/analytics/config', (req, res) => {
   res.json({
     gaId: process.env.NEXT_PUBLIC_GA_ID || process.env.GA_ID || '',
@@ -54,13 +54,13 @@ app.post('/api/pagbank/create-pix', async (req, res) => {
     if (!customer || !customer.name || !customer.email || (!customer.tax_id && !customer.cpf)) {
       return res.status(400).json({
         success: false,
-        error: 'Dados obrigatórios do comprador incompletos (Nome, E-mail, CPF).'
+        error: 'Dados obrigatﾃｳrios do comprador incompletos (Nome, E-mail, CPF).'
       });
     }
 
     const order = await pagbank.createPixOrder({
       courseId: courseId || 'nr-35',
-      courseName: courseName || 'Material Didático NR',
+      courseName: courseName || 'Material Didﾃ｡tico NR',
       customer,
       amount: amount || 2700
     });
@@ -75,7 +75,7 @@ app.post('/api/pagbank/create-pix', async (req, res) => {
   }
 });
 
-// 5. Rota: Criar Pedido Cartão de Crédito (POST /api/pagbank/create-card)
+// 5. Rota: Criar Pedido Cartﾃ｣o de Crﾃｩdito (POST /api/pagbank/create-card)
 app.post('/api/pagbank/create-card', async (req, res) => {
   try {
     const { courseId, courseName, customer, cardToken, cardData, amount } = req.body;
@@ -83,7 +83,7 @@ app.post('/api/pagbank/create-card', async (req, res) => {
     if (!customer || !customer.name || !customer.email || (!customer.tax_id && !customer.cpf)) {
       return res.status(400).json({
         success: false,
-        error: 'Dados obrigatórios do comprador incompletos.'
+        error: 'Dados obrigatﾃｳrios do comprador incompletos.'
       });
     }
 
@@ -91,7 +91,7 @@ app.post('/api/pagbank/create-card', async (req, res) => {
 
     const order = await pagbank.createCardOrder({
       courseId: courseId || 'nr-35',
-      courseName: courseName || 'Material Didático NR',
+      courseName: courseName || 'Material Didﾃ｡tico NR',
       customer,
       cardToken: tokenToUse,
       amount: amount || 2700,
@@ -104,7 +104,7 @@ app.post('/api/pagbank/create-card', async (req, res) => {
         customerEmail: customer.email,
         customerName: customer.name,
         courseId: courseId || 'nr-35',
-        courseName: courseName || 'Material Didático NR'
+        courseName: courseName || 'Material Didﾃ｡tico NR'
       }).catch(err => console.error('[Auto Email Error]:', err));
     }
 
@@ -113,7 +113,7 @@ app.post('/api/pagbank/create-card', async (req, res) => {
     console.error('[API Create Card Error]:', error);
     res.status(500).json({
       success: false,
-      error: error.message || 'Erro ao processar cobrança no cartão.'
+      error: error.message || 'Erro ao processar cobranﾃｧa no cartﾃ｣o.'
     });
   }
 });
@@ -126,13 +126,13 @@ app.get('/api/pagbank/check-status', async (req, res) => {
     if (!orderId) {
       return res.status(400).json({
         success: false,
-        error: 'Parâmetro orderId é obrigatório.'
+        error: 'Parﾃ｢metro orderId ﾃｩ obrigatﾃｳrio.'
       });
     }
 
     const result = await pagbank.getOrderStatus(orderId);
     
-    // Se mudou para PAID, dispara entrega automática por e-mail caso ainda não tenha sido disparada
+    // Se mudou para PAID, dispara entrega automﾃ｡tica por e-mail caso ainda nﾃ｣o tenha sido disparada
     if (result.status === 'PAID' && result.isMock) {
       const mock = pagbank.memoryOrders.get(orderId);
       if (mock && !mock.emailDispatched) {
@@ -166,14 +166,27 @@ app.post('/api/pagbank/webhook', async (req, res) => {
       const items = orderData.items || [];
       const item = items[0] || {};
 
+      let materialUrl = null;
+      let certificateUrl = null;
+      const cId = item.reference_id || 'nr-35';
+      try {
+        const { data } = await supabase.from('courses').select('material_url, certificate_url').eq('id', cId).single();
+        if (data) {
+          materialUrl = data.material_url;
+          certificateUrl = data.certificate_url;
+        }
+      } catch(e) { console.error('Supabase Error (Webhook)', e); }
+
       if (!process.env.RESEND_API_KEY) {
         console.log(`[Mock Webhook] Mock Email Enviado com Sucesso para: ${customer.email || 'desconhecido'}`);
       } else {
         emailService.sendCourseMaterial({
           customerEmail: customer.email,
           customerName: customer.name,
-          courseId: item.reference_id || 'nr-35',
-          courseName: item.name || 'Material Didático Check Now'
+          courseId: cId,
+          courseName: item.name || 'Material Didático Check Now',
+          materialUrl,
+          certificateUrl
         }).catch(err => console.error('[Webhook Email Error]:', err));
       }
     }
@@ -197,38 +210,31 @@ app.post('/api/send-material', async (req, res) => {
     const { customerEmail, customerName, courseId, courseName } = req.body;
 
     if (!customerEmail) {
-      return res.status(400).json({ success: false, error: 'customerEmail é obrigatório.' });
+      return res.status(400).json({ success: false, error: 'customerEmail ﾃｩ obrigatﾃｳrio.' });
     }
 
+    let materialUrl = null;
+    let certificateUrl = null;
+    try {
+      const { data } = await supabase.from('courses').select('material_url, certificate_url').eq('id', courseId).single();
+      if (data) {
+        materialUrl = data.material_url;
+        certificateUrl = data.certificate_url;
+      }
+    } catch(e) { console.error('Supabase Error (API)', e); }
+
     if (!process.env.RESEND_API_KEY) {
-      console.log(`[Resend Mock] Chave não configurada. E-mail simulado para: ${customerEmail}`);
+      console.log(`[Resend Mock] Chave nao configurada para: ${customerEmail}`);
       return res.json({ success: true, isMock: true, message: 'Mock Email Enviado' });
     }
 
-    const { Resend } = require('resend');
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const emailFrom = process.env.EMAIL_FROM || 'onboarding@resend.dev';
-    const finalCourseName = courseName || 'Material Didático Check Now';
-
-    console.log(`Tentando enviar e-mail via Resend para: ${customerEmail}`);
-
-    const data = await resend.emails.send({
-      from: emailFrom,
-      to: [customerEmail],
-      subject: `Seu Material Check Now: ${finalCourseName}`,
-      html: `<h1>Pagamento Confirmado!</h1><p>Obrigado por adquirir o material. Acesse seus downloads no site.</p>`
+    const responseData = await emailService.sendCourseMaterial({
+       customerEmail, customerName, courseId, courseName, materialUrl, certificateUrl
     });
 
-    console.log('Resposta do Resend:', data);
-
-    if (data.error) {
-      console.error('Erro Resend (API Error):', data.error);
-      return res.status(400).json({ success: false, error: data.error.message || 'Erro na API do Resend' });
-    }
-
-    res.json({ success: true, data });
+    res.json({ success: true, data: responseData });
   } catch (error) {
-    console.error('Erro Resend (Exceção):', error);
+    console.error('Erro Resend (Exceﾃｧﾃ｣o):', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
@@ -251,11 +257,11 @@ app.get('/api/download/:courseId/:type', (req, res) => {
     }
 
     if (!targetFilePath || !fs.existsSync(targetFilePath)) {
-      // Fallback/Mock: Retornar arquivo genérico se não encontrar o real no MVP
-      console.log(`[Mock Download] Gerando arquivo temporário para: ${targetFileName}`);
-      const mockContent = `Arquivo original pendente na pasta /public/downloads.\n\nSimulação de Arquivo Baixado:\nCurso: ${courseId}\nTipo: ${type}\nNome do Arquivo Esperado: ${targetFileName}`;
+      // Fallback/Mock: Retornar arquivo genﾃｩrico se nﾃ｣o encontrar o real no MVP
+      console.log(`[Mock Download] Gerando arquivo temporﾃ｡rio para: ${targetFileName}`);
+      const mockContent = `Arquivo original pendente na pasta /public/downloads.\n\nSimulaﾃｧﾃ｣o de Arquivo Baixado:\nCurso: ${courseId}\nTipo: ${type}\nNome do Arquivo Esperado: ${targetFileName}`;
       
-      res.setHeader('Content-Type', 'text/plain'); // Usando text/plain provisório para evitar erro de PDF corrompido
+      res.setHeader('Content-Type', 'text/plain'); // Usando text/plain provisﾃｳrio para evitar erro de PDF corrompido
       res.setHeader('Content-Disposition', `attachment; filename="MOCK_${targetFileName}.txt"`);
       return res.send(mockContent);
     }
@@ -272,13 +278,13 @@ app.get('/api/download/:courseId/:type', (req, res) => {
 // ==========================================
 const dataFilePath = path.join(__dirname, 'data', 'courses.json');
 
-// Middleware de Autentica��o Simples
+// Middleware de Autentica鈬o Simples
 const adminAuth = (req, res, next) => {
   const token = req.headers.authorization;
   if (token === `Bearer ${process.env.ADMIN_PASSWORD}`) {
     next();
   } else {
-    res.status(401).json({ success: false, error: 'N�o autorizado. Senha incorreta.' });
+    res.status(401).json({ success: false, error: 'N縊 autorizado. Senha incorreta.' });
   }
 };
 
@@ -332,7 +338,7 @@ app.put('/api/admin/courses/:id', adminAuth, (req, res) => {
       writeCourses(courses);
       res.json({ success: true, course: courses[index] });
     } else {
-      res.status(404).json({ success: false, error: 'Curso n�o encontrado.' });
+      res.status(404).json({ success: false, error: 'Curso n縊 encontrado.' });
     }
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -368,9 +374,9 @@ app.get('/api/health', (req, res) => {
 // Iniciar Servidor
 app.listen(PORT, () => {
   console.log(`=======================================================`);
-  console.log(`🚀 Check Now Platform rodando em: http://localhost:${PORT}`);
-  console.log(`💳 Gateway PagBank (Ambiente: ${process.env.PAGBANK_ENV || 'sandbox'})`);
-  console.log(`📧 Serviço de E-mail Resend (${emailService.isConfigured() ? 'PRODUÇÃO ATIVA' : 'MODO SIMULAÇÃO ATIVO'})`);
-  console.log(`📂 Downloads disponíveis em: /downloads/ ou /api/download/`);
+  console.log(`�噫 Check Now Platform rodando em: http://localhost:${PORT}`);
+  console.log(`�諜 Gateway PagBank (Ambiente: ${process.env.PAGBANK_ENV || 'sandbox'})`);
+  console.log(`�透 Serviﾃｧo de E-mail Resend (${emailService.isConfigured() ? 'PRODUﾃ�グ ATIVA' : 'MODO SIMULAﾃ�グ ATIVO'})`);
+  console.log(`�唐 Downloads disponﾃｭveis em: /downloads/ ou /api/download/`);
   console.log(`=======================================================`);
 });

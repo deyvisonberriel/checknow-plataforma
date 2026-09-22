@@ -198,14 +198,33 @@
             <textarea id="courseDesc" required rows="2" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm resize-none"></textarea>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Preço Atual (R$)</label>
-              <input type="number" step="0.01" id="coursePrice" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+          <div class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Preço Atual (R$)</label>
+                <input type="number" step="0.01" id="coursePrice" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Preço Antigo (R$)</label>
+                <input type="number" step="0.01" id="courseOldPrice" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+              </div>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Preço Antigo (R$)</label>
-              <input type="number" step="0.01" id="courseOldPrice" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm" />
+
+            <!-- UPLOADS (MATERIAL E CERTIFICADO) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 p-4 border border-dashed border-gray-300 rounded-xl bg-gray-50/50">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Apostila / Material (.pdf)</label>
+                <input type="file" id="courseMaterialFile" accept=".pdf" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-brand-teal/10 file:text-brand-teal hover:file:bg-brand-teal/20 transition-all cursor-pointer" />
+                <p id="courseMaterialStatus" class="text-[10px] text-slate-400 mt-1 truncate"></p>
+                <!-- URL oculta para edição -->
+                <input type="hidden" id="courseMaterialUrl" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Certificado (.pdf)</label>
+                <input type="file" id="courseCertFile" accept=".pdf" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-brand-teal/10 file:text-brand-teal hover:file:bg-brand-teal/20 transition-all cursor-pointer" />
+                <p id="courseCertStatus" class="text-[10px] text-slate-400 mt-1 truncate"></p>
+                <input type="hidden" id="courseCertUrl" />
+              </div>
             </div>
           </div>
 
@@ -479,6 +498,13 @@
       document.getElementById('coursePrice').value = c.currentPrice;
       document.getElementById('courseOldPrice').value = c.oldPrice;
       document.getElementById('courseSpecial').checked = c.isSpecialOffer;
+      
+      document.getElementById('courseMaterialUrl').value = c.material_url || '';
+      document.getElementById('courseMaterialStatus').textContent = c.material_url ? 'Arquivo atual salvo no banco' : '';
+      
+      document.getElementById('courseCertUrl').value = c.certificate_url || '';
+      document.getElementById('courseCertStatus').textContent = c.certificate_url ? 'Arquivo atual salvo no banco' : '';
+
       document.getElementById('modalTitle').textContent = 'Editar Curso';
     }
 
@@ -488,6 +514,46 @@
       if (!form.checkValidity()) return form.reportValidity();
       
       const id = document.getElementById('courseId').value;
+      const originalBtnText = btnSave.innerHTML;
+
+      // 1. LÓGICA DE UPLOAD NO SUPABASE STORAGE
+      const materialFile = document.getElementById('courseMaterialFile').files[0];
+      const certFile = document.getElementById('courseCertFile').files[0];
+      
+      let materialUrl = document.getElementById('courseMaterialUrl').value;
+      let certUrl = document.getElementById('courseCertUrl').value;
+
+      if (materialFile || certFile) {
+         btnSave.innerHTML = '<span class="animate-pulse flex items-center gap-2"><i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Fazendo upload...</span>';
+         if (window.lucide) window.lucide.createIcons();
+         btnSave.disabled = true;
+      }
+
+      try {
+        if (materialFile) {
+          const matPath = `material-${Date.now()}-${materialFile.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+          const { error: errMat } = await window.supabaseClient.storage.from('materiais').upload(matPath, materialFile, { upsert: true });
+          if (errMat) throw errMat;
+          materialUrl = window.supabaseClient.storage.from('materiais').getPublicUrl(matPath).data.publicUrl;
+        }
+
+        if (certFile) {
+          const certPath = `cert-${Date.now()}-${certFile.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+          const { error: errCert } = await window.supabaseClient.storage.from('materiais').upload(certPath, certFile, { upsert: true });
+          if (errCert) throw errCert;
+          certUrl = window.supabaseClient.storage.from('materiais').getPublicUrl(certPath).data.publicUrl;
+        }
+      } catch (uploadErr) {
+         console.error("Erro no upload", uploadErr);
+         showToast('Erro ao fazer upload dos arquivos no Storage.', true);
+         btnSave.innerHTML = originalBtnText;
+         btnSave.disabled = false;
+         return;
+      }
+
+      btnSave.innerHTML = '<span class="animate-pulse">Salvando Curso...</span>';
+
+      // 2. SALVAR DADOS NO DB
       const payload = {
         tag: document.getElementById('courseTag').value,
         categoryId: document.getElementById('courseCategory').value,
@@ -496,6 +562,8 @@
         currentPrice: parseFloat(document.getElementById('coursePrice').value),
         oldPrice: parseFloat(document.getElementById('courseOldPrice').value),
         isSpecialOffer: document.getElementById('courseSpecial').checked,
+        material_url: materialUrl,
+        certificate_url: certUrl,
         status: 'active'
       };
 
@@ -513,6 +581,9 @@
       } catch (err) {
         showToast('Erro ao salvar curso no banco.', true);
         console.error(err);
+      } finally {
+        btnSave.innerHTML = originalBtnText;
+        btnSave.disabled = false;
       }
     });
 
