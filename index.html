@@ -1933,8 +1933,10 @@
                   customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
                   customerName: buyerName.value.trim() || 'Aluno',
                   courseId: currentSelectedCourse.id,
-                  courseName: currentSelectedCourse.name
-                };
+                  courseName: currentSelectedCourse.name,
+              material_url: currentSelectedCourse.material_url,
+              certificate_url: currentSelectedCourse.certificate_url
+            };
                 const response = await fetch('/api/send-material', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
@@ -2037,8 +2039,10 @@
                   customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
                   customerName: buyerName.value.trim() || 'Aluno',
                   courseId: currentSelectedCourse.id,
-                  courseName: currentSelectedCourse.name
-                };
+                  courseName: currentSelectedCourse.name,
+              material_url: currentSelectedCourse.material_url,
+              certificate_url: currentSelectedCourse.certificate_url
+            };
                 const response = await fetch('/api/send-material', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
@@ -2171,8 +2175,10 @@
             customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
             customerName: buyerName.value.trim() || 'Aluno',
             courseId: currentSelectedCourse.id,
-            courseName: currentSelectedCourse.name
-          };
+            courseName: currentSelectedCourse.name,
+              material_url: currentSelectedCourse.material_url,
+              certificate_url: currentSelectedCourse.certificate_url
+            };
           const response = await fetch('/api/send-material', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
