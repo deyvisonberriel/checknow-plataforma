@@ -48,38 +48,42 @@
         lucide.createIcons();
       }
 
-      partnerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const oldText = btnSavePartner.innerHTML;
-        btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Salvando...';
-        btnSavePartner.disabled = true;
+      document.addEventListener('submit', async (e) => {
+        if (e.target && e.target.id === 'partnerForm') {
+          e.preventDefault();
+          const btnSavePartner = document.getElementById('btnSavePartner');
+          const partnerForm = e.target;
+          const oldText = btnSavePartner.innerHTML;
+          btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Salvando...';
+          btnSavePartner.disabled = true;
 
-        try {
-          const fileInput = document.getElementById('pLogoFile');
-          if (!fileInput.files || fileInput.files.length === 0) {
-            throw new Error("Selecione um arquivo de imagem.");
+          try {
+            const fileInput = document.getElementById('pLogoFile');
+            if (!fileInput.files || fileInput.files.length === 0) {
+              throw new Error("Selecione um arquivo de imagem.");
+            }
+            
+            btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Fazendo upload...';
+            const file = fileInput.files[0];
+            const logo_url = await window.db.uploadPartnerLogo(file);
+
+            const partner = {
+              name: document.getElementById('pName').value.trim(),
+              logo_url: logo_url
+            };
+
+            await window.db.createPartner(partner);
+            showToast('Parceiro adicionado com sucesso!');
+            document.getElementById('partnerModal').classList.add('hidden');
+            partnerForm.reset();
+            fetchPartners();
+          } catch (error) {
+            console.error(error);
+            alert('Erro Supabase ao salvar parceiro: \n' + (error.message || JSON.stringify(error)));
+          } finally {
+            btnSavePartner.innerHTML = oldText;
+            btnSavePartner.disabled = false;
           }
-          
-          btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Fazendo upload...';
-          const file = fileInput.files[0];
-          const logo_url = await window.db.uploadPartnerLogo(file);
-
-          const partner = {
-            name: document.getElementById('pName').value.trim(),
-            logo_url: logo_url
-          };
-
-          await window.db.createPartner(partner);
-          showToast('Parceiro adicionado com sucesso!');
-          document.getElementById('partnerModal').classList.add('hidden');
-          partnerForm.reset();
-          fetchPartners();
-        } catch (error) {
-          console.error(error);
-          alert('Erro Supabase ao salvar parceiro: \n' + (error.message || JSON.stringify(error)));
-        } finally {
-          btnSavePartner.innerHTML = oldText;
-          btnSavePartner.disabled = false;
         }
       });
 
