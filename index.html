@@ -2192,56 +2192,7 @@
             pixQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(mockCode)}`;
           }
           showState('pix');
-          // Auto-aprovação em 5s no fallback standalone do cliente
-          setTimeout(async () => {
-            if (checkoutStatePix && !checkoutStatePix.classList.contains('hidden')) {
-              showState('loading');
-              
-              try {
-                const emailData = {
-                  customerEmail: buyerEmail.value.trim() || 'cliente@exemplo.com',
-                  customerName: buyerName.value.trim() || 'Aluno',
-                  courseId: currentSelectedCourse.id,
-                  courseName: currentSelectedCourse.name,
-              material_url: currentSelectedCourse.material_url,
-              certificate_url: currentSelectedCourse.certificate_url
-            };
-                const response = await fetch('/api/send-material', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(emailData)
-                });
-
-                if (!response.ok) {
-                  const errorText = await response.text(); // Lê como texto caso não seja JSON
-                  throw new Error(`Erro na rota (${response.status}): ${errorText.substring(0, 50)}`);
-                }
-
-                const emailResult = await response.json();
-                
-                if (emailResult.success) {
-                  console.log('E-mail enviado via Resend (silencioso)');
-                } else {
-                  console.error('Erro no envio do e-mail: ' + (emailResult.error || 'Falha desconhecida no servidor.'));
-                }
-              } catch (errEmail) {
-                console.error("Erro capturado:", errEmail);
-                console.warn('Simulação/Dev: ' + errEmail.message);
-              }
-
-              if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim() || 'cliente@exemplo.com';
-              if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
-                            if (currentSelectedCourse.material_url) {
-                const btnApostila = document.getElementById('btnDownloadApostila');
-                if (btnApostila) btnApostila.href = currentSelectedCourse.material_url;
-              }
-              if (currentSelectedCourse.certificate_url) {
-                const btnCert = document.getElementById('btnDownloadCertificado');
-                if (btnCert) btnCert.href = currentSelectedCourse.certificate_url;
-              }
-              showState('success');
-            }
-          }, 5000);
+          // Auto-aprovação removida. O frontend agora apenas aguarda.
         }
       });
     }
