@@ -11,102 +11,7 @@
   <link rel="shortcut icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
   <meta name="theme-color" content="#13899C" />
-  <script src="https://cdn.tailwindcss.com">
-      // API: Buscar Parceiros
-      let partnersData = [];
-      const partnersTableBody = document.getElementById('partnersTableBody');
-      const partnerForm = document.getElementById('partnerForm');
-      const btnSavePartner = document.getElementById('btnSavePartner');
-
-      async function fetchPartners() {
-        if (window.db && window.db.getPartners) {
-          partnersData = await window.db.getPartners();
-        }
-        renderPartnersTable();
-      }
-
-      function renderPartnersTable() {
-        if (!partnersData || partnersData.length === 0) {
-          partnersTableBody.innerHTML = `<tr><td colspan="3" class="px-6 py-8 text-center text-red-500 font-medium">Nenhum parceiro encontrado.</td></tr>`;
-          return;
-        }
-        partnersTableBody.innerHTML = partnersData.map(p => `
-          <tr class="hover:bg-gray-50/50 transition-colors">
-            <td class="px-6 py-4">
-              <span class="text-sm font-semibold text-slate-800">${p.name}</span>
-            </td>
-            <td class="px-6 py-4">
-              <img src="${p.logo_url}" alt="${p.name}" class="h-10 w-auto object-contain max-w-[150px] bg-slate-50 p-1 rounded border" />
-            </td>
-            <td class="px-6 py-4 text-right">
-              <button onclick="removePartner(${p.id})" class="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-              </button>
-            </td>
-          </tr>
-        `).join('');
-        lucide.createIcons();
-      }
-
-      async function salvarParceiro() {
-        const btnSavePartner = document.getElementById('btnSavePartner');
-        const oldText = btnSavePartner.innerHTML;
-        btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Salvando...';
-        btnSavePartner.disabled = true;
-
-        try {
-          const fileInput = document.getElementById('pLogoFile');
-          const nameInput = document.getElementById('pName');
-          
-          if (!nameInput.value.trim()) {
-            throw new Error("Preencha o nome da empresa.");
-          }
-          
-          if (!fileInput.files || fileInput.files.length === 0) {
-            throw new Error("Selecione um arquivo de imagem.");
-          }
-          
-          btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Fazendo upload...';
-          const file = fileInput.files[0];
-          const logo_url = await window.db.uploadPartnerLogo(file);
-
-          const partner = {
-            name: nameInput.value.trim(),
-            logo_url: logo_url
-          };
-
-          await window.db.createPartner(partner);
-          showToast('Parceiro adicionado com sucesso!');
-          document.getElementById('partnerModal').classList.add('hidden');
-          
-          // Reset inputs manually
-          nameInput.value = '';
-          fileInput.value = '';
-          
-          fetchPartners();
-        } catch (error) {
-          console.error(error);
-          alert('Erro Supabase ao salvar parceiro: \n' + (error.message || JSON.stringify(error)));
-        } finally {
-          btnSavePartner.innerHTML = oldText;
-          btnSavePartner.disabled = false;
-        }
-      }
-
-      async function removePartner(id) {
-        if (confirm('Tem certeza que deseja excluir este parceiro?')) {
-          try {
-            await window.db.deletePartner(id);
-            showToast('Parceiro excluído!');
-            fetchPartners();
-          } catch (error) {
-            console.error(error);
-            alert('Erro ao excluir: ' + error.message);
-          }
-        }
-      }
-
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
@@ -1178,5 +1083,106 @@
 
 
 
-  </body>
+  \n<script>\n
+      // API: Buscar Parceiros
+      let partnersData = [];
+      const partnersTableBody = document.getElementById('partnersTableBody');
+      const partnerForm = document.getElementById('partnerForm');
+      const btnSavePartner = document.getElementById('btnSavePartner');
+
+      async function fetchPartners() {
+        if (window.db && window.db.getPartners) {
+          partnersData = await window.db.getPartners();
+        }
+        renderPartnersTable();
+      }
+
+      function renderPartnersTable() {
+        if (!partnersData || partnersData.length === 0) {
+          partnersTableBody.innerHTML = `<tr><td colspan="3" class="px-6 py-8 text-center text-red-500 font-medium">Nenhum parceiro encontrado.</td></tr>`;
+          return;
+        }
+        partnersTableBody.innerHTML = partnersData.map(p => `
+          <tr class="hover:bg-gray-50/50 transition-colors">
+            <td class="px-6 py-4">
+              <span class="text-sm font-semibold text-slate-800">${p.name}</span>
+            </td>
+            <td class="px-6 py-4">
+              <img src="${p.logo_url}" alt="${p.name}" class="h-10 w-auto object-contain max-w-[150px] bg-slate-50 p-1 rounded border" />
+            </td>
+            <td class="px-6 py-4 text-right">
+              <button onclick="removePartner(${p.id})" class="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+        lucide.createIcons();
+      }
+
+      async function salvarParceiro() {
+        console.log("Botão clicado, a iniciar processo...");
+        const btnSavePartner = document.getElementById('btnSavePartner');
+        const oldText = btnSavePartner.innerHTML;
+        btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Salvando...';
+        btnSavePartner.disabled = true;
+
+        try {
+          const fileInput = document.getElementById('pLogoFile');
+          const nameInput = document.getElementById('pName');
+          
+          if (!nameInput.value.trim()) {
+            throw new Error("Preencha o nome da empresa.");
+          }
+          
+          if (!fileInput.files || fileInput.files.length === 0) {
+            throw new Error("Selecione um arquivo de imagem.");
+          }
+          
+          btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Fazendo upload...';
+          const file = fileInput.files[0];
+          
+          if (!window.db || !window.db.uploadPartnerLogo) {
+             throw new Error("A API db.js (uploadPartnerLogo) não foi carregada corretamente.");
+          }
+          
+          const logo_url = await window.db.uploadPartnerLogo(file);
+
+          const partner = {
+            name: nameInput.value.trim(),
+            logo_url: logo_url
+          };
+
+          await window.db.createPartner(partner);
+          showToast('Parceiro adicionado com sucesso!');
+          document.getElementById('partnerModal').classList.add('hidden');
+          
+          // Reset inputs manually
+          nameInput.value = '';
+          fileInput.value = '';
+          
+          fetchPartners();
+        } catch (error) {
+          console.error("Erro no catch:", error);
+          alert("Erro na execução: " + (error.message || error));
+        } finally {
+          btnSavePartner.innerHTML = oldText;
+          btnSavePartner.disabled = false;
+        }
+      }
+
+      async function removePartner(id) {
+        if (confirm('Tem certeza que deseja excluir este parceiro?')) {
+          try {
+            await window.db.deletePartner(id);
+            showToast('Parceiro excluído!');
+            fetchPartners();
+          } catch (error) {
+            console.error(error);
+            alert('Erro ao excluir: ' + error.message);
+          }
+        }
+      }
+
+  \n</script>\n</body>
 </html>
