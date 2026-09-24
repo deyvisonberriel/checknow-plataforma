@@ -101,7 +101,7 @@
       theme: {
         extend: {
             animation: {
-              'marquee': 'marquee 25s linear infinite',
+              'marquee': 'marquee 15s linear infinite',
             },
             keyframes: {
               marquee: {
@@ -635,11 +635,12 @@
 
   
     <!-- SEÇÃO 6.5: CARROSSEL DE PARCEIROS (PROVA SOCIAL) -->
-    <section id="parceiros" class="py-12 bg-gray-50 border-t border-surface-border overflow-hidden hidden">
+    <section id="parceiros" class="py-16 bg-gray-50 border-t border-surface-border overflow-hidden hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 class="text-center text-xs sm:text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
-          Empresas que confiam no nosso trabalho
-        </h3>
+        <div class="text-center mb-10 sm:mb-12">
+            <h3 class="text-sm font-bold tracking-widest uppercase text-brand-teal mb-2">Parceiros</h3>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">Empresas que confiam no nosso trabalho</h2>
+          </div>
         
         <div class="flex overflow-hidden">
           <div id="marqueeList1" class="flex shrink-0 animate-marquee items-center justify-around gap-12 sm:gap-20 pr-12 sm:pr-20">
@@ -1399,7 +1400,7 @@
 
         // Render HTML logic
         const partnerHtml = partners.map(p => `
-          <img src="${p.logo_url}" alt="${p.name || 'Parceiro'}" class="h-12 sm:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100" />
+          <img src="${p.logo_url}" alt="${p.name || 'Parceiro'}" class="h-16 md:h-20 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
         `).join('');
 
         if (m1) m1.innerHTML = partnerHtml;
