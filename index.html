@@ -2183,17 +2183,10 @@
           showState('pix');
           startStatusPolling(data.orderId);
         } catch (err) {
-          console.warn('[PagBank Pix Client Fallback]:', err.message);
-          // Fallback suave para simulação caso o servidor não esteja ativo
-          const mockCode = `00020126580014br.gov.bcb.pix0136checknow-sst@pix.pagbank.com.br520400005303986540527.005802BR5925CHECK NOW SST TREINAMENTOS6009SAO PAULO62070503***6304E8A2`;
-          if (pixCodeInput) pixCodeInput.value = mockCode;
-          const pixQrImage = document.getElementById('pixQrImage');
-          if (pixQrImage) {
-            pixQrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(mockCode)}`;
+            console.error('[PagBank Pix Error]:', err.message);
+            showState('form');
+            showErrorAlert('Erro ao gerar Pix no PagBank: ' + err.message);
           }
-          showState('pix');
-          // Auto-aprovação removida. O frontend agora apenas aguarda.
-        }
       });
     }
 
@@ -2245,19 +2238,10 @@
             throw new Error(data.message || 'Pagamento recusado.');
           }
         } catch (err) {
-          console.warn('[PagBank Card Client Fallback]:', err.message);
-          if (successCustomerEmail) successCustomerEmail.textContent = buyerEmail.value.trim();
-          if (successCourseName) successCourseName.textContent = currentSelectedCourse.name;
-                        if (currentSelectedCourse.material_url) {
-                const btnApostila = document.getElementById('btnDownloadApostila');
-                if (btnApostila) btnApostila.href = currentSelectedCourse.material_url;
-              }
-              if (currentSelectedCourse.certificate_url) {
-                const btnCert = document.getElementById('btnDownloadCertificado');
-                if (btnCert) btnCert.href = currentSelectedCourse.certificate_url;
-              }
-              showState('success');
-        }
+            console.error('[PagBank Card Error]:', err.message);
+            showState('form');
+            showErrorAlert('Erro no pagamento via cartão: ' + err.message);
+          }
       });
     }
 
