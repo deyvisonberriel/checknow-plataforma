@@ -104,6 +104,29 @@ async function deleteService(id) {
   if (error) throw error;
 }
 
+
+// Partners
+async function getPartners() {
+  if (!window.supabaseClient) return [];
+  const { data, error } = await window.supabaseClient.from('partners').select('id, name, logo_url');
+  if (error) {
+    console.error("Erro Supabase (Partners):", error);
+    return [];
+  }
+  return data || [];
+}
+
+async function createPartner(partner) {
+  if (!window.supabaseClient) return;
+  const { error } = await window.supabaseClient.from('partners').insert([partner]);
+  if (error) throw error;
+}
+
+async function deletePartner(id) {
+  if (!window.supabaseClient) return;
+  const { error } = await window.supabaseClient.from('partners').delete().eq('id', id);
+  if (error) throw error;
+}
 window.db = { 
   getCategories, 
   getCourses, 
@@ -115,5 +138,8 @@ window.db = {
   updateSiteContent,
   getServices,
   saveService,
-  deleteService
+  deleteService,
+  getPartners,
+  createPartner,
+  deletePartner
 };

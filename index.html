@@ -100,6 +100,15 @@
       darkMode: 'class',
       theme: {
         extend: {
+            animation: {
+              'marquee': 'marquee 25s linear infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              }
+            },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
@@ -624,7 +633,24 @@
     </div>
   </section>
 
-  <!-- SEÇÃO 7: GARANTIA INCONDICIONAL DE 7 DIAS -->
+  
+    <!-- SEÇÃO 6.5: CARROSSEL DE PARCEIROS (PROVA SOCIAL) -->
+    <section id="parceiros" class="py-12 bg-gray-50 border-t border-surface-border overflow-hidden hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h3 class="text-center text-xs sm:text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
+          Empresas que confiam no nosso trabalho
+        </h3>
+        
+        <div class="flex overflow-hidden">
+          <div id="marqueeList1" class="flex shrink-0 animate-marquee items-center justify-around gap-12 sm:gap-20 pr-12 sm:pr-20">
+          </div>
+          <div id="marqueeList2" class="flex shrink-0 animate-marquee items-center justify-around gap-12 sm:gap-20 pr-12 sm:pr-20" aria-hidden="true">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: GARANTIA INCONDICIONAL DE 7 DIAS -->
   <section id="garantia" class="py-16 bg-white border-y border-surface-border">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -1356,7 +1382,31 @@
     // ==========================================
     // RENDERIZAÇÃO DINÂMICA VIA DB.JS (SINGLE SOURCE OF TRUTH)
     // ==========================================
-    async function renderPublicCatalog() {
+    
+      // API: Buscar Parceiros
+      async function renderPartners() {
+        const partners = window.db && window.db.getPartners ? await window.db.getPartners() : [];
+        const section = document.getElementById('parceiros');
+        const m1 = document.getElementById('marqueeList1');
+        const m2 = document.getElementById('marqueeList2');
+
+        if (!partners || partners.length === 0) {
+          if (section) section.classList.add('hidden');
+          return;
+        }
+
+        if (section) section.classList.remove('hidden');
+
+        // Render HTML logic
+        const partnerHtml = partners.map(p => `
+          <img src="${p.logo_url}" alt="${p.name || 'Parceiro'}" class="h-12 sm:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100" />
+        `).join('');
+
+        if (m1) m1.innerHTML = partnerHtml;
+        if (m2) m2.innerHTML = partnerHtml;
+      }
+
+      async function renderPublicCatalog() {
       const dbCategories = window.db ? await window.db.getCategories() : [];
       const dbCourses = window.db ? await window.db.getCourses() : [];
 
@@ -1561,6 +1611,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       renderPublicCatalog();
+        renderPartners();
       renderSiteContent();
       renderServices();
     });

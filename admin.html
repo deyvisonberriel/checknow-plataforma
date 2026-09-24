@@ -11,7 +11,83 @@
   <link rel="shortcut icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
   <meta name="theme-color" content="#13899C" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+      // API: Buscar Parceiros
+      let partnersData = [];
+      const partnersTableBody = document.getElementById('partnersTableBody');
+      const partnerForm = document.getElementById('partnerForm');
+      const btnSavePartner = document.getElementById('btnSavePartner');
+
+      async function fetchPartners() {
+        if (window.db && window.db.getPartners) {
+          partnersData = await window.db.getPartners();
+        }
+        renderPartnersTable();
+      }
+
+      function renderPartnersTable() {
+        if (!partnersData || partnersData.length === 0) {
+          partnersTableBody.innerHTML = `<tr><td colspan="3" class="px-6 py-8 text-center text-red-500 font-medium">Nenhum parceiro encontrado.</td></tr>`;
+          return;
+        }
+        partnersTableBody.innerHTML = partnersData.map(p => `
+          <tr class="hover:bg-gray-50/50 transition-colors">
+            <td class="px-6 py-4">
+              <span class="text-sm font-semibold text-slate-800">${p.name}</span>
+            </td>
+            <td class="px-6 py-4">
+              <img src="${p.logo_url}" alt="${p.name}" class="h-10 w-auto object-contain max-w-[150px] bg-slate-50 p-1 rounded border" />
+            </td>
+            <td class="px-6 py-4 text-right">
+              <button onclick="removePartner(${p.id})" class="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+        lucide.createIcons();
+      }
+
+      partnerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const oldText = btnSavePartner.innerHTML;
+        btnSavePartner.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Salvando...';
+        btnSavePartner.disabled = true;
+
+        try {
+          const partner = {
+            name: document.getElementById('pName').value.trim(),
+            logo_url: document.getElementById('pLogo').value.trim()
+          };
+
+          await window.db.createPartner(partner);
+          showToast('Parceiro adicionado com sucesso!');
+          document.getElementById('partnerModal').classList.add('hidden');
+          partnerForm.reset();
+          fetchPartners();
+        } catch (error) {
+          console.error(error);
+          alert('Erro ao salvar parceiro: ' + error.message);
+        } finally {
+          btnSavePartner.innerHTML = oldText;
+          btnSavePartner.disabled = false;
+        }
+      });
+
+      async function removePartner(id) {
+        if (confirm('Tem certeza que deseja excluir este parceiro?')) {
+          try {
+            await window.db.deletePartner(id);
+            showToast('Parceiro excluído!');
+            fetchPartners();
+          } catch (error) {
+            console.error(error);
+            alert('Erro ao excluir: ' + error.message);
+          }
+        }
+      }
+
+  </script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
@@ -218,7 +294,34 @@
         </div>
       </div>
 
-    </main>
+    
+        <!-- PARTNERS SECTION -->
+        <div id="partnersSection" class="hidden space-y-6">
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-extrabold text-slate-800">Parceiros & Logos</h2>
+            <button onclick="document.getElementById('partnerModal').classList.remove('hidden')" class="px-4 py-2 bg-brand-teal text-white rounded-lg text-sm font-semibold hover:bg-brand-teal-dark transition-colors shadow-sm flex items-center gap-2">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              Novo Parceiro
+            </button>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <table class="w-full text-left text-sm text-slate-600">
+              <thead class="bg-gray-50/80 border-b border-gray-200 text-slate-700 text-xs uppercase font-semibold">
+                <tr>
+                  <th class="px-6 py-4">Nome</th>
+                  <th class="px-6 py-4">Logo (URL)</th>
+                  <th class="px-6 py-4 text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="partnersTableBody" class="divide-y divide-gray-100">
+                <!-- Renderizado dinamicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
   </div>
 
   <!-- MODAL DE FORMULÁRIO -->
@@ -485,7 +588,7 @@
 
     // Tab Switching
     function switchTab(tab) {
-      const tabs = ['courses', 'categories', 'content', 'services'];
+      const tabs = ['courses', 'categories', 'content', 'services', 'partners'];
       tabs.forEach(t => {
         const sec = document.getElementById(`${t}Section`);
         const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}`);
@@ -502,6 +605,7 @@
       else if (tab === 'categories') fetchCategories();
       else if (tab === 'content') fetchContent();
       else if (tab === 'services') fetchServices();
+      else if (tab === 'partners') fetchPartners();
     }
 
     // Inicialização
@@ -1022,5 +1126,33 @@
       }
     }
   </script>
-</body>
+
+    <!-- PARTNER MODAL -->
+    <div id="partnerModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+          <h3 class="text-lg font-bold text-slate-800">Adicionar Parceiro</h3>
+          <button type="button" onclick="document.getElementById('partnerModal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-white transition-colors">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        
+        <form id="partnerForm" class="p-6 space-y-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Nome da Empresa *</label>
+            <input type="text" id="pName" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-teal/20 focus:border-brand-teal text-sm transition-all bg-slate-50 focus:bg-white" placeholder="Ex: Nikitis">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Logo URL *</label>
+            <input type="url" id="pLogo" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-teal/20 focus:border-brand-teal text-sm transition-all bg-slate-50 focus:bg-white" placeholder="https://...">
+          </div>
+          <div class="pt-2 flex justify-end gap-3">
+            <button type="button" onclick="document.getElementById('partnerModal').classList.add('hidden')" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">Cancelar</button>
+            <button type="submit" id="btnSavePartner" class="px-6 py-2.5 bg-brand-teal text-white rounded-xl text-sm font-bold hover:bg-brand-teal-dark transition-colors shadow-sm flex items-center gap-2">Salvar Parceiro</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </body>
 </html>
