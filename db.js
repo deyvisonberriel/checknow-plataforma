@@ -116,6 +116,28 @@ async function getPartners() {
   return data || [];
 }
 
+
+async function uploadPartnerLogo(file) {
+  if (!window.supabaseClient) throw new Error("Supabase não inicializado");
+  
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+  
+  const { data, error } = await window.supabaseClient
+    .storage
+    .from('parceiros')
+    .upload(fileName, file);
+
+  if (error) throw error;
+  
+  const { data: publicUrlData } = window.supabaseClient
+    .storage
+    .from('parceiros')
+    .getPublicUrl(fileName);
+
+  return publicUrlData.publicUrl;
+}
+
 async function createPartner(partner) {
   if (!window.supabaseClient) return;
   const { error } = await window.supabaseClient.from('partners').insert([partner]);
@@ -140,6 +162,7 @@ window.db = {
   saveService,
   deleteService,
   getPartners,
+  uploadPartnerLogo,
   createPartner,
   deletePartner
 };
