@@ -747,12 +747,10 @@
           <a href="#" class="inline-block">
             <img src="logo.png" alt="Check Now - Assessoria em Saúde e Segurança do Trabalho" class="h-20 sm:h-24 md:h-28 w-auto object-contain max-w-[300px]" />
           </a>
-          <p class="text-slate-500 text-sm leading-relaxed max-w-sm mt-4 mb-4">
+          <p class="text-sm text-slate-500 font-semibold mt-3 mb-1">CNPJ: 08.151.823.0001/09</p>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-sm mt-4 mb-4">
               Há 18 anos capacitando profissionais com excelência. Cursos de Segurança do Trabalho com certificação reconhecida e materiais atualizados conforme o MTE.
             </p>
-            <div id="footerContent" class="text-brand-teal font-bold hover:underline block text-sm">
-              <a href="mailto:contato@cursoschecknow.com.br">contato@cursoschecknow.com.br</a>
-            </div>
         </div>
 
         <!-- Links Rápidos -->
@@ -1518,11 +1516,6 @@
             if (titleEl && item.title) titleEl.innerHTML = item.title;
             if (contentEl && item.content) {
               contentEl.innerHTML = `<p class="text-slate-600 text-sm sm:text-base leading-relaxed">${item.content}</p>`;
-            }
-          } else if (item.id === 'contact') {
-            const contentEl = document.getElementById('footerContent');
-            if (contentEl && item.content) {
-              contentEl.innerHTML = `<p>${item.content}</p>`;
             }
           }
         });
