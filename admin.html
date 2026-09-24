@@ -81,12 +81,18 @@
       </div>
       <!-- Subnav (Tabs) -->
       <div class="bg-gray-50 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6">
-          <button id="tabCourses" onclick="switchTab('courses')" class="py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6 overflow-x-auto">
+          <button id="tabCourses" onclick="switchTab('courses')" class="py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors whitespace-nowrap">
             Cursos
           </button>
-          <button id="tabCategories" onclick="switchTab('categories')" class="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors">
+          <button id="tabCategories" onclick="switchTab('categories')" class="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors whitespace-nowrap">
             Categorias
+          </button>
+          <button id="tabContent" onclick="switchTab('content')" class="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors whitespace-nowrap">
+            Conteúdo do Site
+          </button>
+          <button id="tabServices" onclick="switchTab('services')" class="py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors whitespace-nowrap">
+            Serviços
           </button>
         </div>
       </div>
@@ -152,6 +158,60 @@
               </tr>
             </thead>
             <tbody id="categoryTableBody" class="divide-y divide-gray-100">
+              <!-- Renderizado dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SEÇÃO CONTEÚDO DO SITE -->
+      <div id="contentSection" class="hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">Conteúdo do Site</h2>
+            <p class="text-slate-500 text-sm mt-1">Gerencie os textos estáticos do site.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <table class="w-full text-left text-sm text-slate-600">
+            <thead class="bg-gray-50/80 border-b border-gray-200 text-slate-700 text-xs uppercase font-semibold">
+              <tr>
+                <th class="px-6 py-4">Sessão (ID)</th>
+                <th class="px-6 py-4">Título</th>
+                <th class="px-6 py-4 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="contentTableBody" class="divide-y divide-gray-100">
+              <!-- Renderizado dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SEÇÃO SERVIÇOS -->
+      <div id="servicesSection" class="hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800">Nossos Serviços</h2>
+            <p class="text-slate-500 text-sm mt-1">Gerencie os serviços oferecidos na página inicial.</p>
+          </div>
+          <button onclick="openServiceModal()" class="bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 shadow-md transition-colors whitespace-nowrap">
+            <i data-lucide="plus" class="w-4 h-4"></i> Novo Serviço
+          </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <table class="w-full text-left text-sm text-slate-600">
+            <thead class="bg-gray-50/80 border-b border-gray-200 text-slate-700 text-xs uppercase font-semibold">
+              <tr>
+                <th class="px-6 py-4">Título</th>
+                <th class="px-6 py-4">Descrição</th>
+                <th class="px-6 py-4 text-center">Ícone (Lucide)</th>
+                <th class="px-6 py-4 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="servicesTableBody" class="divide-y divide-gray-100">
               <!-- Renderizado dinamicamente -->
             </tbody>
           </table>
@@ -280,6 +340,86 @@
     </div>
   </div>
 
+  <!-- MODAL DE CONTEÚDO -->
+  <div id="contentModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+        <h3 id="contentModalTitle" class="text-lg font-bold text-slate-800">Editar Conteúdo</h3>
+        <button onclick="closeContentModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <form id="contentForm" class="space-y-5">
+          <input type="hidden" id="contentId" />
+          
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Título</label>
+            <input type="text" id="contentTitle" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm font-medium" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Texto / Conteúdo</label>
+            <textarea id="contentBody" required rows="4" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm resize-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">URL da Imagem (Opcional)</label>
+            <input type="text" id="contentImageUrl" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm font-medium" placeholder="https://..." />
+          </div>
+        </form>
+      </div>
+
+      <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-3">
+        <button onclick="closeContentModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">Cancelar</button>
+        <button id="btnSaveContent" class="bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-2 px-5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE SERVIÇO -->
+  <div id="serviceModal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col">
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+        <h3 id="serviceModalTitle" class="text-lg font-bold text-slate-800">Novo Serviço</h3>
+        <button onclick="closeServiceModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <form id="serviceForm" class="space-y-5">
+          <input type="hidden" id="serviceId" />
+          
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Título</label>
+            <input type="text" id="serviceTitle" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm font-medium" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Descrição</label>
+            <textarea id="serviceDesc" required rows="3" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm resize-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Ícone (Nome Lucide, ex: shield)</label>
+            <input type="text" id="serviceIcon" required class="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:border-brand-teal focus:ring-1 focus:ring-brand-teal outline-none transition-all text-sm font-medium" />
+          </div>
+        </form>
+      </div>
+
+      <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center justify-end gap-3">
+        <button onclick="closeServiceModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-colors">Cancelar</button>
+        <button id="btnSaveService" class="bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-2 px-5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="lib/supabase.js"></script>
@@ -311,9 +451,23 @@
     const btnSaveCategory = document.getElementById('btnSaveCategory');
     const categoryTableBody = document.getElementById('categoryTableBody');
 
+    // Modal Elements (Content)
+    const contentModal = document.getElementById('contentModal');
+    const contentForm = document.getElementById('contentForm');
+    const btnSaveContent = document.getElementById('btnSaveContent');
+    const contentTableBody = document.getElementById('contentTableBody');
+
+    // Modal Elements (Services)
+    const serviceModal = document.getElementById('serviceModal');
+    const serviceForm = document.getElementById('serviceForm');
+    const btnSaveService = document.getElementById('btnSaveService');
+    const servicesTableBody = document.getElementById('servicesTableBody');
+
     // Estado local vinculado ao db.js (Single Source of Truth no localStorage)
     let coursesData = window.db ? window.db.getCourses() : [];
     let categoriesData = window.db ? window.db.getCategories() : [];
+    let contentData = [];
+    let servicesData = [];
 
     // Password Toggle
     function togglePassword() {
@@ -331,24 +485,23 @@
 
     // Tab Switching
     function switchTab(tab) {
-      const secCourses = document.getElementById('coursesSection');
-      const secCats = document.getElementById('categoriesSection');
-      const btnCourses = document.getElementById('tabCourses');
-      const btnCats = document.getElementById('tabCategories');
+      const tabs = ['courses', 'categories', 'content', 'services'];
+      tabs.forEach(t => {
+        const sec = document.getElementById(`${t}Section`);
+        const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (t === tab) {
+          sec.classList.remove('hidden');
+          btn.className = 'py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors whitespace-nowrap';
+        } else {
+          sec.classList.add('hidden');
+          btn.className = 'py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors whitespace-nowrap';
+        }
+      });
 
-      if (tab === 'courses') {
-        secCourses.classList.remove('hidden');
-        secCats.classList.add('hidden');
-        btnCourses.className = 'py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors';
-        btnCats.className = 'py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors';
-        fetchCourses();
-      } else {
-        secCourses.classList.add('hidden');
-        secCats.classList.remove('hidden');
-        btnCats.className = 'py-3 border-b-2 border-brand-teal text-brand-teal font-semibold text-sm transition-colors';
-        btnCourses.className = 'py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-semibold text-sm transition-colors';
-        renderCategoryTable();
-      }
+      if (tab === 'courses') fetchCourses();
+      else if (tab === 'categories') fetchCategories();
+      else if (tab === 'content') fetchContent();
+      else if (tab === 'services') fetchServices();
     }
 
     // Inicialização
@@ -399,6 +552,8 @@
       dashboardView.classList.remove('hidden');
       await fetchCourses();
       await fetchCategories();
+      await fetchContent();
+      await fetchServices();
     }
 
     // API: Buscar Cursos
@@ -686,6 +841,183 @@
         await fetchCategories();
       } catch (err) {
         showToast('Erro ao excluir categoria.', true);
+        console.error(err);
+      }
+    }
+    // ==========================================
+    // Conteúdo do Site
+    // ==========================================
+    async function fetchContent() {
+      if (window.db && window.db.getSiteContent) {
+        contentData = await window.db.getSiteContent();
+      }
+      renderContentTable();
+    }
+
+    function renderContentTable() {
+      if (!contentData || contentData.length === 0) {
+        contentTableBody.innerHTML = `<tr><td colspan="3" class="px-6 py-8 text-center text-red-500 font-medium">Nenhum conteúdo encontrado.</td></tr>`;
+        return;
+      }
+      contentTableBody.innerHTML = contentData.map(c => `
+        <tr class="hover:bg-gray-50/50 transition-colors">
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-brand-teal/10 text-brand-teal border border-brand-teal/20">
+              ${c.id}
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <p class="text-sm font-semibold text-slate-800">${c.title}</p>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button onclick="editContent('${c.id}')" class="p-1.5 text-slate-400 hover:text-brand-teal transition-colors" title="Editar">
+              <i data-lucide="edit-2" class="w-4 h-4"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function closeContentModal() {
+      contentModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      contentForm.reset();
+      document.getElementById('contentId').value = '';
+    }
+
+    function editContent(id) {
+      const c = contentData.find(x => x.id === id);
+      if (!c) return;
+      document.getElementById('contentId').value = c.id;
+      document.getElementById('contentTitle').value = c.title || '';
+      document.getElementById('contentBody').value = c.content || '';
+      document.getElementById('contentImageUrl').value = c.image_url || '';
+      contentModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    btnSaveContent.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (!contentForm.checkValidity()) return contentForm.reportValidity();
+      
+      const payload = {
+        id: document.getElementById('contentId').value,
+        title: document.getElementById('contentTitle').value,
+        content: document.getElementById('contentBody').value,
+        image_url: document.getElementById('contentImageUrl').value
+      };
+
+      try {
+        if (window.db && window.db.updateSiteContent) await window.db.updateSiteContent(payload);
+        showToast('Conteúdo salvo com sucesso!');
+        closeContentModal();
+        await fetchContent();
+      } catch (err) {
+        showToast('Erro ao salvar conteúdo.', true);
+        console.error(err);
+      }
+    });
+
+    // ==========================================
+    // Serviços CRUD
+    // ==========================================
+    async function fetchServices() {
+      if (window.db && window.db.getServices) {
+        servicesData = await window.db.getServices();
+      }
+      renderServicesTable();
+    }
+
+    function renderServicesTable() {
+      if (!servicesData || servicesData.length === 0) {
+        servicesTableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-8 text-center text-red-500 font-medium">Nenhum serviço encontrado.</td></tr>`;
+        return;
+      }
+      servicesTableBody.innerHTML = servicesData.map(s => `
+        <tr class="hover:bg-gray-50/50 transition-colors">
+          <td class="px-6 py-4">
+            <span class="text-sm font-semibold text-slate-800">${s.title}</span>
+          </td>
+          <td class="px-6 py-4">
+            <span class="text-sm text-slate-500 truncate block max-w-xs">${s.description}</span>
+          </td>
+          <td class="px-6 py-4 text-center">
+            <i data-lucide="${s.icon || 'star'}" class="w-5 h-5 mx-auto text-brand-teal"></i>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button onclick="editService('${s.id}')" class="p-1.5 text-slate-400 hover:text-brand-teal transition-colors" title="Editar">
+                <i data-lucide="edit-2" class="w-4 h-4"></i>
+              </button>
+              <button onclick="deleteService('${s.id}')" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors" title="Excluir">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function openServiceModal() {
+      serviceModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('serviceModalTitle').textContent = 'Novo Serviço';
+    }
+
+    function closeServiceModal() {
+      serviceModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      serviceForm.reset();
+      document.getElementById('serviceId').value = '';
+    }
+
+    function editService(id) {
+      const s = servicesData.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('serviceId').value = s.id;
+      document.getElementById('serviceTitle').value = s.title || '';
+      document.getElementById('serviceDesc').value = s.description || '';
+      document.getElementById('serviceIcon').value = s.icon || 'star';
+      document.getElementById('serviceModalTitle').textContent = 'Editar Serviço';
+      serviceModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    btnSaveService.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (!serviceForm.checkValidity()) return serviceForm.reportValidity();
+      
+      const id = document.getElementById('serviceId').value;
+      const payload = {
+        title: document.getElementById('serviceTitle').value,
+        description: document.getElementById('serviceDesc').value,
+        icon: document.getElementById('serviceIcon').value
+      };
+      if (id) {
+        payload.id = id;
+      }
+
+      try {
+        if (window.db && window.db.saveService) await window.db.saveService(payload);
+        showToast('Serviço salvo com sucesso!');
+        closeServiceModal();
+        await fetchServices();
+      } catch (err) {
+        showToast('Erro ao salvar serviço.', true);
+        console.error(err);
+      }
+    });
+
+    async function deleteService(id) {
+      if (!confirm('Tem certeza que deseja excluir este serviço?')) return;
+      try {
+        if (window.db && window.db.deleteService) await window.db.deleteService(id);
+        showToast('Serviço excluído!');
+        await fetchServices();
+      } catch (err) {
+        showToast('Erro ao excluir serviço.', true);
         console.error(err);
       }
     }

@@ -225,12 +225,12 @@
           </div>
 
           <!-- Headline H1 -->
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          <h1 id="heroTitle" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
             Materiais Completos e Atualizados das Principais <span class="text-brand-teal">Normas Regulamentadoras (NRs)</span>
           </h1>
 
           <!-- Subheadline -->
-          <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+          <p id="heroContent" class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
             Escolha o treinamento desejado e receba a <strong>apostila técnica completa em PDF + modelo de certificado de conclusão</strong>. O acervo definitivo para Técnicos, Engenheiros de SST e Empresas.
           </p>
 
@@ -441,6 +441,53 @@
     </div>
   </section>
 
+  <!-- SEÇÃO 3.5: NOSSOS SERVIÇOS -->
+  <section id="servicos" class="py-20 bg-white border-t border-surface-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Header Serviços -->
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-bold tracking-widest text-brand-teal uppercase">Soluções Completas em SST</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Nossos Serviços
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Conheça nossas soluções para adequação e conformidade da sua empresa com as exigências legais.
+        </p>
+      </div>
+
+      <!-- Grid Dinâmica de Serviços -->
+      <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Esqueleto de Carregamento (Fallback Visual) -->
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border animate-pulse">
+          <div class="w-14 h-14 rounded-2xl bg-slate-200 mb-6"></div>
+          <div class="h-6 bg-slate-200 rounded w-3/4 mb-3"></div>
+          <div class="space-y-2">
+            <div class="h-4 bg-slate-200 rounded"></div>
+            <div class="h-4 bg-slate-200 rounded w-5/6"></div>
+          </div>
+        </div>
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border animate-pulse hidden md:block">
+          <div class="w-14 h-14 rounded-2xl bg-slate-200 mb-6"></div>
+          <div class="h-6 bg-slate-200 rounded w-2/3 mb-3"></div>
+          <div class="space-y-2">
+            <div class="h-4 bg-slate-200 rounded"></div>
+            <div class="h-4 bg-slate-200 rounded w-4/6"></div>
+          </div>
+        </div>
+        <div class="bg-surface-body p-8 rounded-3xl border border-surface-border animate-pulse hidden lg:block">
+          <div class="w-14 h-14 rounded-2xl bg-slate-200 mb-6"></div>
+          <div class="h-6 bg-slate-200 rounded w-1/2 mb-3"></div>
+          <div class="space-y-2">
+            <div class="h-4 bg-slate-200 rounded"></div>
+            <div class="h-4 bg-slate-200 rounded w-full"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- SEÇÃO 4: GRADE COMPLETA DE CURSOS & CATÁLOGO INDIVIDUAL -->
   <section id="cursos" class="py-20 bg-surface-body relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -550,17 +597,19 @@
               <i data-lucide="shield" class="w-3.5 h-3.5"></i> Especialista à Frente da Check Now
             </div>
             
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            <h3 id="aboutTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900">
               Vander Rana
             </h3>
 
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Especialista em <strong>Segurança do Trabalho</strong>, com ampla atuação prática na capacitação de equipes, elaboração de documentos normativos e gestão preventiva de riscos operacionais.
-            </p>
+            <div id="aboutContent" class="space-y-4">
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Especialista em <strong>Segurança do Trabalho</strong>, com ampla atuação prática na capacitação de equipes, elaboração de documentos normativos e gestão preventiva de riscos operacionais.
+              </p>
 
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-              A <strong>Check Now</strong> foi criada com o objetivo de descomplicar e estruturar as Normas Regulamentadoras (NRs) em materiais didáticos prontos para uso, entregando ferramentas reais para instrutores, consultorias e empresas.
-            </p>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                A <strong>Check Now</strong> foi criada com o objetivo de descomplicar e estruturar as Normas Regulamentadoras (NRs) em materiais didáticos prontos para uso, entregando ferramentas reais para instrutores, consultorias e empresas.
+              </p>
+            </div>
 
             <div class="pt-4 flex flex-wrap gap-4 text-xs font-semibold text-slate-700">
               <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-4 h-4 text-brand-green"></i> Didática Direta</span>
@@ -698,9 +747,11 @@
           <a href="#" class="inline-block">
             <img src="logo.png" alt="Check Now - Assessoria em Saúde e Segurança do Trabalho" class="h-20 sm:h-24 md:h-28 w-auto object-contain max-w-[300px]" />
           </a>
-          <p class="text-slate-500 leading-relaxed max-w-sm">
-            Capacitação técnica e materiais práticos em Segurança e Saúde no Trabalho (SST) em conformidade com as Normas Regulamentadoras vigentes.
-          </p>
+          <div id="footerContent" class="text-slate-500 leading-relaxed max-w-sm">
+            <p>
+              Capacitação técnica e materiais práticos em Segurança e Saúde no Trabalho (SST) em conformidade com as Normas Regulamentadoras vigentes.
+            </p>
+          </div>
         </div>
 
         <!-- Links Rápidos -->
@@ -1450,8 +1501,74 @@
       });
     }
 
+    async function renderSiteContent() {
+      if (!window.db || !window.db.getSiteContent) return;
+      try {
+        const contentList = await window.db.getSiteContent();
+        contentList.forEach(item => {
+          if (item.id === 'hero') {
+            const titleEl = document.getElementById('heroTitle');
+            const contentEl = document.getElementById('heroContent');
+            if (titleEl && item.title) titleEl.innerHTML = item.title;
+            if (contentEl && item.content) contentEl.innerHTML = item.content;
+          } else if (item.id === 'about') {
+            const titleEl = document.getElementById('aboutTitle');
+            const contentEl = document.getElementById('aboutContent');
+            if (titleEl && item.title) titleEl.innerHTML = item.title;
+            if (contentEl && item.content) {
+              contentEl.innerHTML = `<p class="text-slate-600 text-sm sm:text-base leading-relaxed">${item.content}</p>`;
+            }
+          } else if (item.id === 'contact') {
+            const contentEl = document.getElementById('footerContent');
+            if (contentEl && item.content) {
+              contentEl.innerHTML = `<p>${item.content}</p>`;
+            }
+          }
+        });
+      } catch (err) {
+        console.error("Erro ao carregar conteúdo do site (fallback mantido):", err);
+      }
+    }
+
+    async function renderServices() {
+      if (!window.db || !window.db.getServices) return;
+      try {
+        const services = await window.db.getServices();
+        const servicesGrid = document.getElementById('servicesGrid');
+        if (!servicesGrid) return;
+        
+        if (services.length === 0) {
+          servicesGrid.innerHTML = `<div class="col-span-full text-center text-slate-500">Nenhum serviço disponível no momento.</div>`;
+          return;
+        }
+        
+        servicesGrid.innerHTML = services.map(srv => {
+          const iconClass = srv.icon || 'star';
+          return `
+          <div class="bg-surface-body p-8 rounded-3xl border border-surface-border hover:border-brand-teal/50 hover:shadow-card-hover transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-brand-teal-light text-brand-teal flex items-center justify-center mb-6">
+              <i data-lucide="${iconClass}" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">${srv.title}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              ${srv.description}
+            </p>
+          </div>`;
+        }).join('');
+        lucide.createIcons();
+      } catch (err) {
+        console.error("Erro ao carregar serviços (fallback mantido):", err);
+        const servicesGrid = document.getElementById('servicesGrid');
+        if (servicesGrid) {
+          servicesGrid.innerHTML = `<div class="col-span-full text-center text-slate-500">Erro ao carregar serviços. Tente novamente mais tarde.</div>`;
+        }
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       renderPublicCatalog();
+      renderSiteContent();
+      renderServices();
     });
 
     // Menu Mobile

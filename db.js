@@ -64,11 +64,56 @@ async function deleteCategoryDB(id) {
   if (error) throw error;
 }
 
+// Site Content
+async function getSiteContent() {
+  if (!window.supabaseClient) return [];
+  const { data, error } = await window.supabaseClient.from('site_content').select('id, title, content, image_url');
+  if (error) {
+    console.error("Erro Supabase (Site Content):", error);
+    return [];
+  }
+  return data || [];
+}
+
+async function updateSiteContent(content) {
+  if (!window.supabaseClient) return;
+  const { error } = await window.supabaseClient.from('site_content').upsert([content]);
+  if (error) throw error;
+}
+
+// Services
+async function getServices() {
+  if (!window.supabaseClient) return [];
+  const { data, error } = await window.supabaseClient.from('services').select('id, title, description, icon');
+  if (error) {
+    console.error("Erro Supabase (Services):", error);
+    return [];
+  }
+  return data || [];
+}
+
+async function saveService(service) {
+  if (!window.supabaseClient) return;
+  const { error } = await window.supabaseClient.from('services').upsert([service]);
+  if (error) throw error;
+}
+
+async function deleteService(id) {
+  if (!window.supabaseClient) return;
+  const { error } = await window.supabaseClient.from('services').delete().eq('id', id);
+  if (error) throw error;
+}
+
 window.db = { 
   getCategories, 
   getCourses, 
   saveCourse, 
   deleteCourseDB, 
   saveCategory, 
-  deleteCategoryDB 
+  deleteCategoryDB,
+  getSiteContent,
+  updateSiteContent,
+  getServices,
+  saveService,
+  deleteService
 };
