@@ -63,10 +63,10 @@
         </div>
         <button type="submit" class="w-full bg-brand-teal hover:bg-[#0f6f7d] text-white font-bold py-3 rounded-xl transition-colors shadow-md">
           Entrar no Painel
-        </button>
+          </button>
+        </form>
       </div>
-        </div>
-      </div>
+    </div>
 
   <!-- DASHBOARD VIEW -->
   <div id="dashboardView" class="hidden min-h-screen bg-gray-50 flex flex-col">
@@ -558,6 +558,7 @@
     }
 
     // Auth: Login
+    if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const pwd = document.getElementById('password').value;
@@ -571,8 +572,10 @@
         showToast('Senha incorreta', true);
       }
     });
+    }
 
     // Auth: Logout
+    if (btnLogout) {
     btnLogout.addEventListener('click', () => {
       authToken = null;
       localStorage.removeItem('admin_token');
@@ -580,6 +583,7 @@
       loginView.classList.remove('hidden');
       document.getElementById('password').value = '';
     });
+    }
 
     // View: Mostrar Dashboard
     async function showDashboard() {
@@ -670,7 +674,7 @@
     function closeModal() {
       modal.classList.add('hidden');
       document.body.style.overflow = '';
-      form.reset();
+      if (form) form.reset();
       document.getElementById('courseId').value = '';
       document.getElementById('modalTitle').textContent = 'Novo Curso';
     }
@@ -699,6 +703,7 @@
     }
 
     // API: Salvar Curso
+    if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         try {
@@ -782,6 +787,7 @@
         btnSave.disabled = false;
       }
     });
+    }
 
     // API: Excluir Curso
     async function deleteCourse(id) {
@@ -834,7 +840,7 @@
     function closeCategoryModal() {
       categoryModal.classList.add('hidden');
       document.body.style.overflow = '';
-      categoryForm.reset();
+      if (categoryForm) categoryForm.reset();
       document.getElementById('categoryId').value = '';
       document.getElementById('categoryModalTitle').textContent = 'Nova Categoria';
     }
@@ -848,6 +854,7 @@
       openCategoryModal();
     }
 
+    if (btnSaveCategory) {
     btnSaveCategory.addEventListener('click', async (e) => {
       e.preventDefault();
       if (!categoryForm.checkValidity()) return categoryForm.reportValidity();
@@ -872,6 +879,7 @@
         console.error(err);
       }
     });
+    }
 
     async function deleteCategory(id) {
       if (!confirm('Tem certeza que deseja excluir esta categoria?')) return;
@@ -923,7 +931,7 @@
     function closeContentModal() {
       contentModal.classList.add('hidden');
       document.body.style.overflow = '';
-      contentForm.reset();
+      if (contentForm) contentForm.reset();
       document.getElementById('contentId').value = '';
     }
 
@@ -938,6 +946,7 @@
       document.body.style.overflow = 'hidden';
     }
 
+    if (btnSaveContent) {
     btnSaveContent.addEventListener('click', async (e) => {
       e.preventDefault();
       if (!contentForm.checkValidity()) return contentForm.reportValidity();
@@ -959,6 +968,7 @@
         console.error(err);
       }
     });
+    }
 
     // ==========================================
     // Serviços CRUD
@@ -1010,7 +1020,7 @@
     function closeServiceModal() {
       serviceModal.classList.add('hidden');
       document.body.style.overflow = '';
-      serviceForm.reset();
+      if (serviceForm) serviceForm.reset();
       document.getElementById('serviceId').value = '';
     }
 
@@ -1026,6 +1036,7 @@
       document.body.style.overflow = 'hidden';
     }
 
+    if (btnSaveService) {
     btnSaveService.addEventListener('click', async (e) => {
       e.preventDefault();
       if (!serviceForm.checkValidity()) return serviceForm.reportValidity();
@@ -1050,6 +1061,7 @@
         console.error(err);
       }
     });
+    }
 
     async function deleteService(id) {
       if (!confirm('Tem certeza que deseja excluir este serviço?')) return;
